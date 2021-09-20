@@ -2,10 +2,6 @@
 Intro comp python project by [TomasBruno1](https://github.com/TomasBruno1), [TomasBerretta](https://github.com/TomasBerretta), [CatalinaMendizabal](https://github.com/CatalinaMendizabal) and [NumaLeone](https://github.com/NumaLeone).
 
 
-![alt_text](images/image1.png "image_tooltip")
-
-
-
 # Trabajo Práctico
 
 
