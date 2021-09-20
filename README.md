@@ -32,6 +32,8 @@ _<span style="text-decoration:underline;">Para el hardware necesitamos contar co
 * Laptop para manejar el streaming y la emulación: elegimos utilizar una laptop en lugar de una RaspberryPi debido a que el manejo de streaming constante y emulación es muy pesado para esta.  
 * Fichero arcade impreso en 3D con sensor infrarrojo
  
+[controlNES](https://media.discordapp.net/attachments/854860219187855382/889569622490243092/unknown.png?width=1038&height=1139)
+[botones](https://media.discordapp.net/attachments/854860219187855382/889569691822092318/unknown.png)
 
 _<span style="text-decoration:underline;">Para la parte del software:</span>_
 
@@ -39,6 +41,8 @@ _<span style="text-decoration:underline;">Para la parte del software:</span>_
 
 * RetroArch para emular: optamos por utilizar RetroArch en lugar de RetroPie debido a que el primero permite mayor libertad a la hora de correr scripts en el background y en la elección de núcleos para emular una mayor cantidad y variedad de juegos.
 * MediaPipe para poder reconocer los diferentes tipos de gestos.
+
+[retroArch](https://media.discordapp.net/attachments/854860219187855382/889569800509087755/unknown.png)
 
 **<span style="text-decoration:underline;">Desarrollo:</span>**
 
@@ -54,13 +58,22 @@ En esta primera etapa, creímos que era de suma importancia comenzar con la part
 
 Comenzamos investigando sobre la librería MediaPipe y las diversas soluciones que esta nos propone para el reconocimiento corporal. Como primera opción, miramos la herramienta para las manos. Implementamos la herramienta con Python y pudimos captar los diversos puntos de ambas manos. En un principio creímos que nos iba a ser de mucha ayuda, pero luego nos dimos cuenta que si para la emulación de los controles del arcade éramos capaces de interpretar otras partes del cuerpo, íbamos a poder generar más control y precisión para lograr nuestro objetivo.
 
+![mano1]
+(https://cdn.discordapp.com/attachments/854860219187855382/881977625650794536/unknown.png)
+[mano2](https://media.discordapp.net/attachments/854860219187855382/881977691950170172/unknown.png)
+
 Luego de familiarizarnos con el control de los diversos puntos de la mano, decidimos optar por la herramienta de la librería MediaPipe llamada Pose. Esta nueva herramienta nos brindaba la posibilidad de reconocer el cuerpo de la persona por completo, teniendo en cuenta diversos puntos corporales y faciales. Esto nos fue de mucha utilidad ya que en conjunto con el lenguaje Python, logramos reconocer ciertos puntos de ambas manos para lograr simular los controles de “up”, “down”, “left” y “right” de un típico control de videojuegos.
+
+[none model](https://media.discordapp.net/attachments/854860219187855382/889571557372997662/unknown.png)
 
 Una vez que probamos las herramientas de Pose y Hands por separado, decidimos usar Holistic, la cuál es un conjunto de ambas con la adición de Face. Esto nos va a permitir incorporar más formas de controlar los distintos inputs que posee un control de arcade mediante la combinación de gestos tanto de las manos como de todo el cuerpo.
 
 **<span style="text-decoration:underline;">Conexión con el emulador</span>**
 
 Una vez implementado un sistema básico de reconocimiento de poses y manos, procedimos a tomar los signos “UP”, “DOWN”, “LEFT” y “RIGHT” como inputs mediante la librería PyAutoGUI. Con esto establecido, empezamos a incorporar los inputs en el emulador RetroArch. Luego de instalar el core de Arcade MAME para poder correr juegos, utilizamos PACMAN como prueba ya que solo requiere los inputs que hasta ahora pudimos implementar.
+
+[retroArch menu](https://media.discordapp.net/attachments/854860219187855382/889570099877519370/unknown.png?width=1450&height=1138)
+[pacman game](https://media.discordapp.net/attachments/854860219187855382/889570326265073704/unknown.png?width=916&height=1137)
 
 **<span style="text-decoration:underline;">Referencias: </span>**
 
