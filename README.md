@@ -32,10 +32,10 @@ _<span style="text-decoration:underline;">Para el hardware necesitamos contar co
 * Laptop para manejar el streaming y la emulación: elegimos utilizar una laptop en lugar de una RaspberryPi debido a que el manejo de streaming constante y emulación es muy pesado para esta.  
 * Fichero arcade impreso en 3D con sensor infrarrojo
 
-<div style="width: 50%; margin: 0 auto;">
+<p align="center">
  <img src= "https://github.com/TomasBruno1/Arcade-IC/blob/master/controlNES.png" width=200 >
  <img src= "https://github.com/TomasBruno1/Arcade-IC/blob/master/botones.png" width=200 >
-</div>
+</p>
 
 
 _<span style="text-decoration:underline;">Para la parte del software:</span>_
@@ -61,21 +61,21 @@ En esta primera etapa, creímos que era de suma importancia comenzar con la part
 
 Comenzamos investigando sobre la librería MediaPipe y las diversas soluciones que esta nos propone para el reconocimiento corporal. Como primera opción, miramos la herramienta para las manos. Implementamos la herramienta con Python y pudimos captar los diversos puntos de ambas manos. En un principio creímos que nos iba a ser de mucha ayuda, pero luego nos dimos cuenta que si para la emulación de los controles del arcade éramos capaces de interpretar otras partes del cuerpo, íbamos a poder generar más control y precisión para lograr nuestro objetivo.
 
-<div>
+<p align="center">
  <img src= "https://github.com/TomasBruno1/Arcade-IC/blob/master/mano1.png" width=400 >
  <img src= "https://github.com/TomasBruno1/Arcade-IC/blob/master/mano2.png" width=400 >
-</div>
+</p>
  
 
 Luego de familiarizarnos con el control de los diversos puntos de la mano, decidimos optar por la herramienta de la librería MediaPipe llamada Pose. Esta nueva herramienta nos brindaba la posibilidad de reconocer el cuerpo de la persona por completo, teniendo en cuenta diversos puntos corporales y faciales. Esto nos fue de mucha utilidad ya que en conjunto con el lenguaje Python, logramos reconocer ciertos puntos de ambas manos para lograr simular los controles de “up”, “down”, “left” y “right” de un típico control de videojuegos.
 
-<div>
+<p align="center">
  <img src= "https://github.com/TomasBruno1/Arcade-IC/blob/master/poseNone.png" width=400 >
  <img src= "https://github.com/TomasBruno1/Arcade-IC/blob/master/poseLeft.png" width=400 >
  <img src= "https://github.com/TomasBruno1/Arcade-IC/blob/master/poseRight.png" width=400 >
  <img src= "https://github.com/TomasBruno1/Arcade-IC/blob/master/poseUP.png" width=400 >
  <img src= "https://github.com/TomasBruno1/Arcade-IC/blob/master/poseDown.png" width=400 >
-</div>
+</p>
  
 
 Una vez que probamos las herramientas de Pose y Hands por separado, decidimos usar Holistic, la cuál es un conjunto de ambas con la adición de Face. Esto nos va a permitir incorporar más formas de controlar los distintos inputs que posee un control de arcade mediante la combinación de gestos tanto de las manos como de todo el cuerpo.
@@ -84,10 +84,10 @@ Una vez que probamos las herramientas de Pose y Hands por separado, decidimos us
 
 Una vez implementado un sistema básico de reconocimiento de poses y manos, procedimos a tomar los signos “UP”, “DOWN”, “LEFT” y “RIGHT” como inputs mediante la librería PyAutoGUI. Con esto establecido, empezamos a incorporar los inputs en el emulador RetroArch. Luego de instalar el core de Arcade MAME para poder correr juegos, utilizamos PACMAN como prueba ya que solo requiere los inputs que hasta ahora pudimos implementar.
 
-<div>
+<p align="center">
  <img src= "https://github.com/TomasBruno1/Arcade-IC/blob/master/retroARCHmenu.png" width=550 >
  <img src= "https://github.com/TomasBruno1/Arcade-IC/blob/master/pacmanRetroArch.png" width=400 >
-</div>
+</p>
  
 
 **<span style="text-decoration:underline;">Referencias: </span>**
