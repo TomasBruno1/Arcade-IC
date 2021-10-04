@@ -1,0 +1,42 @@
+
+#login-button {
+    background: #0C45D9;
+    color: #fff;
+    border-radius: 20px;
+    margin: 10px;
+    text-transform: capitalize;
+}
+
+#register-button {
+    background: #0616A1;
+    color: #fff;
+    border-radius: 20px;
+    margin: 10px;
+    text-transform: capitalize;
+}
+
+.welcomeText{
+    text-align: left;
+    margin-left: 4.5vw;
+    font-size: 85px;
+    font-weight: 500;
+    letter-spacing: -0.105vw;
+    color: #e3e8e6;
+}
+
+.description {
+    color: #fff;
+    margin-left: 4.5vw;
+    width: 70%;
+    margin-right: 4.5vw;
+    font-size: 22px;
+}
+
+.sign-in-button {
+    display: flex;
+    flex-direction: row-reverse;
+    margin-right: 15px;
+    margin-top: auto;
+    position: relative;
+    top: 170px;
+}
