@@ -54,18 +54,18 @@ En esta primera etapa, creímos que era de suma importancia comenzar con la part
 Comenzamos investigando sobre la librería MediaPipe y las diversas soluciones que esta nos propone para el reconocimiento corporal. Como primera opción, miramos la herramienta para las manos. La forma de operar es la siguiente: Con OpenCV se genera un objeto VideoCapture para tomar los video frames de la webcam. Luego, como OpenCV usa frames con el formato BGR y MediaPipe con RGB hay que hacer un cambio. Hecho esto, se siguen procesando los frames con landmarks según el tipo de modelo que estemos usando y van produciendo un “result” que indica si en el frame se encontró algún landmark. Implementamos la herramienta con Python y pudimos captar los diversos puntos de ambas manos. En un principio creímos que nos iba a ser de mucha ayuda, pero luego nos dimos cuenta que si para la emulación de los controles del arcade éramos capaces de interpretar otras partes del cuerpo, íbamos a poder generar más control y precisión para lograr nuestro objetivo.
 
 <p align="center">
- <img src= "https://github.com/TomasBruno1/Arcade-IC/blob/master/mano1.png" width=400 >
- <img src= "https://github.com/TomasBruno1/Arcade-IC/blob/master/mano2.png" width=400 >
+ <img src= "https://github.com/TomasBruno1/Arcade-IC/blob/master/screenshots/mano1.png" width=400 >
+ <img src= "https://github.com/TomasBruno1/Arcade-IC/blob/master/screenshots/mano2.png" width=400 >
 </p>
 
 Luego de familiarizarnos con el control de los diversos puntos de la mano, decidimos optar por la herramienta de la librería MediaPipe llamada Pose. Esta nueva herramienta nos brindaba la posibilidad de reconocer el cuerpo de la persona por completo, teniendo en cuenta diversos puntos corporales y faciales. Esto nos fue de mucha utilidad ya que en conjunto con el lenguaje Python, logramos reconocer ciertos puntos de ambas manos para lograr simular los controles de “up”, “down”, “left” y “right” de un típico control de videojuegos.
 
 <p align="center">
- <img src= "https://github.com/TomasBruno1/Arcade-IC/blob/master/poseNone.png" width=400 >
- <img src= "https://github.com/TomasBruno1/Arcade-IC/blob/master/poseLeft.png" width=400 >
- <img src= "https://github.com/TomasBruno1/Arcade-IC/blob/master/poseRight.png" width=400 >
- <img src= "https://github.com/TomasBruno1/Arcade-IC/blob/master/poseUP.png" width=400 >
- <img src= "https://github.com/TomasBruno1/Arcade-IC/blob/master/poseDown.png" width=400 >
+ <img src= "https://github.com/TomasBruno1/Arcade-IC/blob/master/screenshots/poseNone.png" width=400 >
+ <img src= "https://github.com/TomasBruno1/Arcade-IC/blob/master/screenshots/poseLeft.png" width=400 >
+ <img src= "https://github.com/TomasBruno1/Arcade-IC/blob/master/screenshots/poseRight.png" width=400 >
+ <img src= "https://github.com/TomasBruno1/Arcade-IC/blob/master/screenshots/poseUP.png" width=400 >
+ <img src= "https://github.com/TomasBruno1/Arcade-IC/blob/master/screenshots/poseDown.png" width=400 >
 </p>
 
 Una vez que probamos las herramientas de Pose y Hands por separado, decidimos usar Holistic, la cuál es un conjunto de ambas con la adición de Face. Esto nos va a permitir incorporar más formas de controlar los distintos inputs que posee un control de arcade mediante la combinación de gestos tanto de las manos como de todo el cuerpo.
