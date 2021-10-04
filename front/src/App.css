@@ -1,0 +1,75 @@
+.App {
+  text-align: center;
+  font-family: Roboto, sans-serif;
+}
+
+.background {
+  background-image: linear-gradient(rgba(0, 0, 0, 0.45), rgba(0, 0, 0, 0.45)),
+  url("./img/background.svg");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-position: center center;
+  height: calc(120vh - 64px);
+}
+
+.buttons-position {
+  display: flex;
+  flex-direction: row-reverse;
+}
+
+#go-back-button {
+  background: #0616A1;
+  color: #fff;
+  border-radius: 20px;
+  border: 2px solid black;
+  margin: 10px;
+  text-transform: capitalize;
+}
+.flex-container{
+  display: flex;
+  align-items: center;
+  align-content: center;
+  justify-content: center;
+  justify-items: center;
+}
+
+#form-box{
+  width: 450px;
+  height: 500px;
+  background: #0855EC 0 0 no-repeat padding-box;
+  border-radius: 20px;
+  opacity: 1;
+}
+
+.text-field {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.suggest-text{
+  display: flex;
+  justify-content: center;
+  color: #ffffff;
+  margin-top: 15px;
+  font-size: 14px;
+}
+
+.link-text{
+  color: #ffffff;
+  margin-left: 3px;
+  font-size: 14px;
+  text-decoration-line: underline;
+  cursor: pointer;
+}
+
+#button{
+  color: #ffffff;
+  font-size: 14px;
+  background: #0C36C6;
+  text-transform: capitalize;
+  border-radius: 40px;
+  width: 100px;
+  border: 2px solid black;
+}
