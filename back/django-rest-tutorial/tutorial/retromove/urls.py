@@ -1,7 +1,8 @@
-from django.urls import path
-from retromove import views
+from django.urls import path, include
+from rest_framework.routers import DefaultRouter
+from .views import UserViewSet
 
-urlpatterns = [
-    path('users/', views.user_list),
-    path('users/<int:pk>/', views.user_detail),
-]
+# Create a router and register our viewsets with it.
+router = DefaultRouter()
+router.register(r'users', UserViewSet)
+urlpatterns = router.urls
