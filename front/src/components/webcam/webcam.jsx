@@ -10,7 +10,7 @@ const videoConstraints = {
     facingMode: "user"
 };
 
-export const WebcamCapture = () => {
+export const WebcamCapture = (props) => {
 
     const [image,setImage]=useState('');
     const webcamRef = React.useRef(null);
@@ -20,6 +20,7 @@ export const WebcamCapture = () => {
         () => {
             const imageSrc = webcamRef.current.getScreenshot();
             setImage(imageSrc)
+            props.setPicture(imageSrc);
         });
 
 

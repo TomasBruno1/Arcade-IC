@@ -15,16 +15,30 @@ const LoginPage = () => {
     const [picture, setPicture] = useState()
 
     const verifyUser = async () => {
-        const response = await fetch('localhost:8080/users', {
+
+        const formData  = new FormData();
+        formData.append("username", username)
+        formData.append("image", picture)
+
+        console.log({
+                formData
+            })
+
+        const response = await fetch('http://127.0.0.1:8000/users/', {
             method: 'POST',
-            body: JSON.stringify({
-                username,
-                picture
-            }),
-            headers: {
-                "Content-type": "multipart/form-data;",
-            },
+            body: formData
         });
+
+        // const response = await fetch('localhost:8080/users', {
+        //     method: 'POST',
+        //     body: JSON.stringify({
+        //         username,
+        //         picture
+        //     }),
+        //     headers: {
+        //         "Content-type": "multipart/form-data;",
+        //     },
+        // });
     }
 
     return (
@@ -34,17 +48,19 @@ const LoginPage = () => {
             </div>
             <Box className='flex-container'>
                 <Box id='form-box' mt={5}>
-                    <form method='POST' encType='multipart/form-data'>
+                    <form>
                         <div className='box-title'>Sign In</div>
                         <Divider variant="middle" id='divider'/>
                         <div className='text-field'>
                             <FormGroup>
-                                <Input id="custom-button" placeholder=" Username" />
+                                <Input id="custom-button" placeholder=" Username" onChange={(text) => setUsername(text.target.value)}/>
                             </FormGroup>
                         </div>
                         <div className='text-field'>
                             <Button id='face-recognition-button' variant="outlined" onClick={() => setToggleFaceRecognition(true)}>Face recognition</Button>
-                            {toggleFaceRecognition ? <WebcamCapture/> : null}
+                            {/*{toggleFaceRecognition ? <WebcamCapture setPicture={setPicture}/> : null}*/}
+                            <input type='file' onChange={(evt) => setPicture(evt.target.files[0])}/>
+
                         </div>
                         <div className='suggest-text'>Do not have an account?
                             <span className='link-text' onClick={() => history.push('/register')}>Register in here!</span>
