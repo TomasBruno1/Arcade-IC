@@ -16,13 +16,13 @@ const LoginPage = () => {
 
     const verifyUser = async () => {
 
-        const formData  = new FormData();
+        const formData = new FormData();
         formData.append("username", username)
         formData.append("image", picture)
 
         console.log({
-                formData
-            })
+            formData
+        })
 
         const response = await fetch('http://127.0.0.1:8000/users/', {
             method: 'POST',
@@ -53,7 +53,8 @@ const LoginPage = () => {
                         <Divider variant="middle" id='divider'/>
                         <div className='text-field'>
                             <FormGroup>
-                                <Input id="custom-button" placeholder=" Username" onChange={(text) => setUsername(text.target.value)}/>
+                                <Input id="custom-button" placeholder=" Username"
+                                       onChange={(text) => setUsername(text.target.value)}/>
                             </FormGroup>
                         </div>
                         <WebcamCapture setPicture={setPicture}/>
