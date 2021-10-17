@@ -22,11 +22,11 @@ const RegisterPage = () => {
         })
     }
 
-    const onFileChange = ({target}) => {
-        if (target.files !== null && target.files[0] !== null) {
-            setPicture(target.files[0]);
-        }
-    }
+    // const onFileChange = ({target}) => {
+    //     if (target.files !== null && target.files[0] !== null) {
+    //         setPicture(target.files[0]);
+    //     }
+    // }
 
     return (
         <div className='background'>
@@ -43,16 +43,16 @@ const RegisterPage = () => {
                                 <Input id="custom-button" placeholder=" Username" onChange={(text) => setUsername(text.target.value)}/>
                             </FormGroup>
                         </div>
-                        {/*<WebcamCapture setPicture={setPicture}/>*/}
-                        <Button id={"custom-button"} variant="contained" component="label">
-                                Upload Image
-                                <input
-                                    type="file"
-                                    name={"thumbnail"}
-                                    onChange={onFileChange}
-                                    hidden
-                                />
-                        </Button>
+                        <WebcamCapture setPicture={setPicture}/>
+                        {/*<Button id={"custom-button"} variant="contained" component="label">*/}
+                        {/*        Upload Image*/}
+                        {/*        <input*/}
+                        {/*            type="file"*/}
+                        {/*            name={"thumbnail"}*/}
+                        {/*            onChange={onFileChange}*/}
+                        {/*            hidden*/}
+                        {/*        />*/}
+                        {/*</Button>*/}
                         <div className='suggest-text'>Already have an account?
                             <span className='link-text'
                                   onClick={() => history.push('/login')}>Log in here!</span>

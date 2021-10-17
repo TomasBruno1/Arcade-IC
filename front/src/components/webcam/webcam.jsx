@@ -20,9 +20,20 @@ export const WebcamCapture = (props) => {
     const capture = React.useCallback(
         () => {
             const imageSrc = webcamRef.current.getScreenshot();
-            const image = webcamRef.current;
             setImage(imageSrc)
-            props.setPicture(imageSrc);
+
+            let arr = imageSrc.split(','),
+                mime = arr[0].match(/:(.*?);/)[1],
+                bstr = atob(arr[1]),
+                n = bstr.length,
+                u8arr = new Uint8Array(n);
+
+            while(n--){
+                u8arr[n] = bstr.charCodeAt(n);
+            }
+
+
+            props.setPicture(new File([u8arr], `${props.user}.jpg`, {type:mime}));
         });
 
     return (
