@@ -36,7 +36,7 @@
 
 #form-box{
   width: 450px;
-  height: 500px;
+  height: 530px;
   background: #0855EC 0 0 no-repeat padding-box;
   border-radius: 20px;
   opacity: 1;
@@ -52,8 +52,9 @@
   display: flex;
   justify-content: center;
   color: #ffffff;
-  margin-top: 15px;
   font-size: 14px;
+  margin-top: 10px;
+  margin-bottom: 10px;
 }
 
 .link-text{
