@@ -1,0 +1,16 @@
+.webcam-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+#face-recognition-button{
+    color: #ffffff;
+    background: #0C45D9;
+    text-transform: capitalize;
+    font-size: 16px;
+    width: 200px;
+    border-radius: 50px;
+    border: 2px solid black;
+}

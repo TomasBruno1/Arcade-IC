@@ -31,12 +31,3 @@
     margin-right: 4.5vw;
     font-size: 22px;
 }
-
-.sign-in-button {
-    display: flex;
-    flex-direction: row-reverse;
-    margin-right: 15px;
-    margin-top: auto;
-    position: relative;
-    top: 170px;
-}
