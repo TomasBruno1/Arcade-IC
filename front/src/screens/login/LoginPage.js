@@ -10,7 +10,6 @@ const LoginPage = () => {
 
     const history = useHistory();
 
-    const [toggleFaceRecognition, setToggleFaceRecognition] = useState()
     const [username, setUsername] = useState("")
     const [picture, setPicture] = useState()
 

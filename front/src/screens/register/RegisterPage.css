@@ -1,0 +1,14 @@
+.register-button {
+    display: flex;
+    flex-direction: row-reverse;
+    margin-right: 15px;
+}
+
+#create-account-button {
+    color: #ffffff;
+    font-size: 14px;
+    background: #0C36C6;
+    text-transform: capitalize;
+    border-radius: 40px;
+    border: 2px solid black;
+}
