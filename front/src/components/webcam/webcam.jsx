@@ -20,6 +20,7 @@ export const WebcamCapture = (props) => {
     const capture = React.useCallback(
         () => {
             const imageSrc = webcamRef.current.getScreenshot();
+            const image = webcamRef.current;
             setImage(imageSrc)
             props.setPicture(imageSrc);
         });
