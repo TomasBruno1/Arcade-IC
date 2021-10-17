@@ -56,7 +56,7 @@ const LoginPage = () => {
                                        onChange={(text) => setUsername(text.target.value)}/>
                             </FormGroup>
                         </div>
-                        <WebcamCapture setPicture={setPicture}/>
+                        <WebcamCapture setPicture={setPicture} user={username}/>
                         <div className='suggest-text'>Do not have an account?
                             <span className='link-text'
                                   onClick={() => history.push('/register')}>Register in here!</span>
