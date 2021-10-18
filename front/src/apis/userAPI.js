@@ -2,7 +2,7 @@ const url = "http://127.0.0.1:8000"
 
 class UserAPI {
 
-     postData = async (data) => {
+    postData = async (data) => {
         try {
             return await fetch(`${url}/users/`, {
                 method: 'POST',
