@@ -4,6 +4,7 @@ import {FormGroup, Input} from "reactstrap";
 import {WebcamCapture} from "../../components/webcam/webcam";
 import {useState} from "react";
 import "./RegisterPage.css";
+import {userAPI} from "../../apis/userAPI";
 
 const RegisterPage = () => {
 
@@ -11,6 +12,21 @@ const RegisterPage = () => {
     const [username, setUsername] = useState("")
     const [picture, setPicture] = useState()
 
+    const onSubmit = async () => {
+        const formData = new FormData();
+        formData.append("username", username)
+        formData.append("image", picture)
+        console.log(formData)
+        userAPI.postData(formData).then((response) =>  {
+            console.log(response)
+        })
+    }
+
+    // const onFileChange = ({target}) => {
+    //     if (target.files !== null && target.files[0] !== null) {
+    //         setPicture(target.files[0]);
+    //     }
+    // }
 
     return (
         <div className='background'>
@@ -19,7 +35,7 @@ const RegisterPage = () => {
             </div>
             <Box className='flex-container'>
                 <Box id='form-box' mt={5}>
-                    <form method='POST' encType='multipart/form-data'>
+                    <form>
                         <div className='box-title'>Create your account</div>
                         <Divider variant="middle" id='divider'/>
                         <div className='text-field'>
@@ -28,12 +44,21 @@ const RegisterPage = () => {
                             </FormGroup>
                         </div>
                         <WebcamCapture setPicture={setPicture}/>
+                        {/*<Button id={"custom-button"} variant="contained" component="label">*/}
+                        {/*        Upload Image*/}
+                        {/*        <input*/}
+                        {/*            type="file"*/}
+                        {/*            name={"thumbnail"}*/}
+                        {/*            onChange={onFileChange}*/}
+                        {/*            hidden*/}
+                        {/*        />*/}
+                        {/*</Button>*/}
                         <div className='suggest-text'>Already have an account?
                             <span className='link-text'
                                   onClick={() => history.push('/login')}>Log in here!</span>
                         </div>
                         <div className='register-button'>
-                            <Button id='create-account-button'>Create Account</Button>
+                            <Button id='create-account-button' onClick={onSubmit}>Create Account</Button>
                         </div>
                     </form>
                 </Box>

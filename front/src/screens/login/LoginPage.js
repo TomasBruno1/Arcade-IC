@@ -4,6 +4,7 @@ import './LoginPage.css';
 import {FormGroup, Input} from 'reactstrap';
 import {useState} from "react";
 import {WebcamCapture} from '../../components/webcam/webcam'
+import {userAPI} from "../../apis/userAPI";
 
 
 const LoginPage = () => {
@@ -13,31 +14,14 @@ const LoginPage = () => {
     const [username, setUsername] = useState("")
     const [picture, setPicture] = useState()
 
-    const verifyUser = async () => {
 
+    const onSubmit = () => {
         const formData = new FormData();
         formData.append("username", username)
         formData.append("image", picture)
-
-        console.log({
-            formData
+        userAPI.loginData(formData).then((response) =>  {
+            console.log(response)
         })
-
-        const response = await fetch('http://127.0.0.1:8000/users/', {
-            method: 'POST',
-            body: formData
-        });
-
-        // const response = await fetch('localhost:8080/users', {
-        //     method: 'POST',
-        //     body: JSON.stringify({
-        //         username,
-        //         picture
-        //     }),
-        //     headers: {
-        //         "Content-type": "multipart/form-data;",
-        //     },
-        // });
     }
 
     return (
@@ -62,7 +46,7 @@ const LoginPage = () => {
                                   onClick={() => history.push('/register')}>Register in here!</span>
                         </div>
                         <div className='sign-in-button'>
-                            <Button id='button' onClick={verifyUser}>Sign In</Button>
+                            <Button id='button' onClick={onSubmit}>Sign In</Button>
                         </div>
                     </form>
                 </Box>
