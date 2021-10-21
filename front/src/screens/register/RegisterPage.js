@@ -43,7 +43,7 @@ const RegisterPage = () => {
                                 <Input id="custom-button" placeholder=" Username" onChange={(text) => setUsername(text.target.value)}/>
                             </FormGroup>
                         </div>
-                        <WebcamCapture setPicture={setPicture}/>
+                        <WebcamCapture setPicture={setPicture} user={username}/>
                         {/*<Button id={"custom-button"} variant="contained" component="label">*/}
                         {/*        Upload Image*/}
                         {/*        <input*/}
