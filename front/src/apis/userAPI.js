@@ -18,9 +18,15 @@ class UserAPI {
     }
 
     loginData = async ( data = {}) => {
+        const csrftoken = getCookie('csrftoken');
+        console.log(csrftoken)
         try {
-            return await fetch(`${url}/users/`, {
+            return await fetch(`${url}/login/`, {
+
                 method: 'POST',
+                headers: {
+                    'X-CSRFToken': csrftoken
+                },
                 body: data
             })
                 .then(res => {
@@ -36,3 +42,19 @@ class UserAPI {
 }
 
 export const userAPI = new UserAPI();
+
+function getCookie(name) {
+    let cookieValue = null;
+    if (document.cookie && document.cookie !== '') {
+        const cookies = document.cookie.split(';');
+        for (let i = 0; i < cookies.length; i++) {
+            const cookie = cookies[i].trim();
+            // Does this cookie string begin with the name we want?
+            if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                break;
+            }
+        }
+    }
+    return cookieValue;
+}

@@ -30,9 +30,11 @@ const LoginPage = () => {
             userAPI.loginData(formData).then((response) =>  {
                 console.log(response)
             })
+            console.log(formData)
         }
 
     }
+
 
     return (
         <div className='background'>
