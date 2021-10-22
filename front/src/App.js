@@ -3,6 +3,7 @@ import LandingPage from "./screens/landing/LandingPage";
 import {BrowserRouter, Route, Switch} from "react-router-dom";
 import LoginPage from "./screens/login/LoginPage";
 import RegisterPage from "./screens/register/RegisterPage";
+import HomePage from "./screens/home/HomePage";
 
 function App() {
   return (
@@ -16,6 +17,10 @@ function App() {
             </Route>
             <Route path="/register">
                 <RegisterPage/>
+            </Route>
+            {/*TODO private route*/}
+            <Route path="/home">
+                <HomePage/>
             </Route>
         </Switch>
       </BrowserRouter>

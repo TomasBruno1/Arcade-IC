@@ -23,7 +23,7 @@ const LoginPage = () => {
         if (picture === undefined) {
             setPictureError("* Picture is required")
         }
-        if(false) {
+        if(true) {
             const formData = new FormData();
             formData.append("username", username)
             formData.append("image", picture)
