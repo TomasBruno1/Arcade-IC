@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import Webcam from "react-webcam";
-import {Button} from "@material-ui/core";
+import {Button, FormHelperText} from "@material-ui/core";
 import './Webcam.css';
 
 const WebcamComponent = () => <Webcam/>;
@@ -19,6 +19,8 @@ export const WebcamCapture = (props) => {
 
     const capture = React.useCallback(
         () => {
+            props.setPictureError("")
+
             const imageSrc = webcamRef.current.getScreenshot();
             setImage(imageSrc)
 
@@ -31,15 +33,15 @@ export const WebcamCapture = (props) => {
             while(n--){
                 u8arr[n] = bstr.charCodeAt(n);
             }
-
-
+            props.setErrorPicture(false)
             props.setPicture(new File([u8arr], `${props.user}.jpg`, {type:mime}));
         });
 
     return (
         <>
             <div className="webcam-container">
-                {image === '' ? <Webcam
+                {image === '' ?
+                    <Webcam
                     audio={false}
                     height={200}
                     mirrored={true}
@@ -57,6 +59,8 @@ export const WebcamCapture = (props) => {
                         onClick={(e) => {
                             e.preventDefault();
                             setImage('')
+                            props.setPicture(undefined)
+                            props.setErrorPicture(false)
                         }}>
                         Retake Image</Button> :
                     <Button
