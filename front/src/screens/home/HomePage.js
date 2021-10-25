@@ -10,8 +10,8 @@ const HomePage = () => {
     const [ name, setName ] = useState("");
 
     useEffect(() => {
-        const user = JSON.parse(sessionStorage.getItem("user"))
-        setName(user.name)
+        const user = sessionStorage.getItem("user")
+        setName(user)
     }, [])
 
 

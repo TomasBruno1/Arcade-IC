@@ -12,9 +12,11 @@ const LoginPage = () => {
     const history = useHistory();
 
     const [username, setUsername] = useState("")
-    const [usernameError, setUsernameError] = useState("")
     const [picture, setPicture] = useState()
+    const [usernameError, setUsernameError] = useState("")
     const [pictureError, setPictureError] = useState("")
+    const [errorUsername, setErrorUsername] = useState(true)
+    const [errorPicture, setErrorPicture] = useState(true)
 
     const onSubmit = () => {
         if (username === "") {
@@ -53,7 +55,7 @@ const LoginPage = () => {
                                 <FormHelperText id='helper-text' error>{!!usernameError ? usernameError : ' '}</FormHelperText>
                             </FormGroup>
                         </div>
-                        <WebcamCapture setPicture={setPicture} user={username}/>
+                        <WebcamCapture setPicture={setPicture} setPictureError={setPictureError} error={pictureError} user={username} setErrorPicture={setErrorPicture}/>
                         <FormHelperText id='picture-text' error>{!!pictureError ? pictureError : ' '}</FormHelperText>
 
                         <div className='suggest-text'>Do not have an account?
