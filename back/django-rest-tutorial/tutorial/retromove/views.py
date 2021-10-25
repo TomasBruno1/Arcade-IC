@@ -1,3 +1,5 @@
+import os
+
 from django.contrib.auth import login
 from rest_framework import viewsets
 from django.contrib.auth.views import LoginView
@@ -34,15 +36,19 @@ def login_view(request):
     except User.DoesNotExist:
         return HttpResponse({'message': 'Invalid username'}, status=400)
 
-    image_of_user = face_recognition.load_image_file('/Users/tbruno/Projects/Faculty/RetroMove/back/django-rest-tutorial/tutorial/media/photos/' + username + '.jpg')
-    user_face_encoding = face_recognition.face_encodings(image_of_user)[0]
+    try:
+        image_path = os.path.join(os.path.dirname(os.path.dirname(__file__)), 'media/photos/' + username + '.jpg')
+        image_of_user = face_recognition.load_image_file(image_path)
+        user_face_encoding = face_recognition.face_encodings(image_of_user)[0]
 
-    image = face_recognition.load_image_file(picture)
-    face_locations = face_recognition.face_locations(image)
-    face_encoding = face_recognition.face_encodings(image, face_locations)
+        image = face_recognition.load_image_file(picture)
+        face_locations = face_recognition.face_locations(image)
+        face_encoding = face_recognition.face_encodings(image, face_locations)
 
-    matches = face_recognition.compare_faces(user_face_encoding, face_encoding)
-    if True in matches:
-        return JsonResponse({'username': user.username})
+        matches = face_recognition.compare_faces(user_face_encoding, face_encoding)
+        if True in matches:
+            return JsonResponse({'username': user.username})
+    except Exception as e:
+        return HttpResponse({'message': 'Invalid credentials'}, status=400)
 
-    return HttpResponse({'message': 'Invalid username'}, status=400)
+    return HttpResponse({'message': 'Invalid credentials'}, status=400)
