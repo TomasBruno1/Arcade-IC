@@ -18,24 +18,26 @@ class UserAPI {
     }
 
     loginData = async ( data = {}) => {
-        const csrftoken = getCookie('csrftoken');
-        console.log(csrftoken)
-        try {
-            return await fetch(`${url}/login/`, {
+        const myHeaders = new Headers();
+        myHeaders.append("Cookie", "csrftoken=OD8OYJr0jJxVTKCWMvJUtLR1RCWRzrmTCMEFtvYWc5ktazrLkkd04F05qhOiUDAG; sessionid=choat2zzvkb4k5615ep0jcv46fvtzsjp");
 
-                method: 'POST',
-                headers: {
-                    'X-CSRFToken': csrftoken
-                },
-                body: data
-            })
-                .then(res => {
-                    window.sessionStorage.setItem("user", (JSON.stringify(res.json())));
-                    window.location.replace("/")
-                })
-        }catch (err) {
-            console.log(err)
-        }
+        const requestOptions = {
+            method: 'POST',
+            headers: myHeaders,
+            body: data,
+            redirect: 'follow'
+        };
+
+        fetch("http://127.0.0.1:8000/login/", requestOptions)
+          .then(response => {
+              return response.json()})
+          .then(result => {
+              console.log(result)
+              console.log(result.username)
+              window.sessionStorage.setItem("user", result.username)
+              window.location.replace("/home")
+          })
+          .catch(error => console.log('error', 'Invalid credentials'));
     }
 
 
