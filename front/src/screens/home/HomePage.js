@@ -19,7 +19,7 @@ const HomePage = () => {
         <div className="background">
             <div className='buttons-position'>
                 <Button id='register-button' size={"large"}>Register</Button>
-                <Button id='login-button' size={"large"}>Login</Button>
+                <Button id='login-button' size={"large"} onClick={() => history.push('/snek')}>Play Snek</Button>
             </div>
             <div className="welcomeText">Welcome to</div>
             <div className="welcomeText" style={{color: '#0C45D9'}}>RetroMOVE</div>

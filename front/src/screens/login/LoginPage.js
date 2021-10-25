@@ -17,6 +17,7 @@ const LoginPage = () => {
     const [pictureError, setPictureError] = useState("")
     const [errorUsername, setErrorUsername] = useState(true)
     const [errorPicture, setErrorPicture] = useState(true)
+    const [loginError, setLoginError] = useState(true)
 
     const onSubmit = () => {
         if (username === "") {
@@ -32,7 +33,6 @@ const LoginPage = () => {
             userAPI.loginData(formData).then((response) =>  {
                 console.log(response)
             })
-            console.log(formData)
         }
 
     }

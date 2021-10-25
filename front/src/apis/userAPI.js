@@ -29,14 +29,15 @@ class UserAPI {
         };
 
         fetch("http://127.0.0.1:8000/login/", requestOptions)
-          .then(response => { return response.json()})
+          .then(response => {
+              return response.json()})
           .then(result => {
               console.log(result)
               console.log(result.username)
               window.sessionStorage.setItem("user", result.username)
               window.location.replace("/home")
           })
-          .catch(error => console.log('error', error));
+          .catch(error => console.log('error', 'Invalid credentials'));
     }
 
 
