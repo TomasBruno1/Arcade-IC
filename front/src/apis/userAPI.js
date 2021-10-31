@@ -3,18 +3,20 @@ const url = "http://127.0.0.1:8000"
 class UserAPI {
 
     postData = async (data) => {
-        try {
-            return await fetch(`${url}/users/`, {
-                method: 'POST',
-                body: data
-            })
-                .then((response) => {
+        let error = undefined
+        await fetch(`${url}/users/`, {
+            method: 'POST',
+            body: data
+        })
+            .then((response) => {
+                if(response.ok === true) {
                     window.location.replace("/login")
                     return response?.json()
-                });
-        }catch (err) {
-            console.log(err)
-        }
+                }else{
+                    error = "Username is already taken"
+                }
+            })
+        return error
     }
 
     loginData = async ( data = {}) => {
@@ -28,16 +30,18 @@ class UserAPI {
             redirect: 'follow'
         };
 
-        fetch("http://127.0.0.1:8000/login/", requestOptions)
+        let error = undefined
+        await fetch("http://127.0.0.1:8000/login/", requestOptions)
           .then(response => {
               return response.json()})
           .then(result => {
-              console.log(result)
-              console.log(result.username)
               window.sessionStorage.setItem("user", result.username)
               window.location.replace("/home")
           })
-          .catch(error => console.log('error', 'Invalid credentials'));
+          .catch(() => {
+              error = "Invalid credentials"
+          });
+        return error
     }
 
 
@@ -45,18 +49,18 @@ class UserAPI {
 
 export const userAPI = new UserAPI();
 
-function getCookie(name) {
-    let cookieValue = null;
-    if (document.cookie && document.cookie !== '') {
-        const cookies = document.cookie.split(';');
-        for (let i = 0; i < cookies.length; i++) {
-            const cookie = cookies[i].trim();
-            // Does this cookie string begin with the name we want?
-            if (cookie.substring(0, name.length + 1) === (name + '=')) {
-                cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
-                break;
-            }
-        }
-    }
-    return cookieValue;
-}
+// function getCookie(name) {
+//     let cookieValue = null;
+//     if (document.cookie && document.cookie !== '') {
+//         const cookies = document.cookie.split(';');
+//         for (let i = 0; i < cookies.length; i++) {
+//             const cookie = cookies[i].trim();
+//             // Does this cookie string begin with the name we want?
+//             if (cookie.substring(0, name.length + 1) === (name + '=')) {
+//                 cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+//                 break;
+//             }
+//         }
+//     }
+//     return cookieValue;
+// }

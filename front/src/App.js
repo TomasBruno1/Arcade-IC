@@ -4,28 +4,36 @@ import {BrowserRouter, Route, Switch} from "react-router-dom";
 import LoginPage from "./screens/login/LoginPage";
 import RegisterPage from "./screens/register/RegisterPage";
 import HomePage from "./screens/home/HomePage";
-import SnekPage from "./screens/snek/SnekPage";
+import SnakePage from "./screens/snake/SnakePage";
+import PrivateRoute from "./components/privateRoute/privateRoute";
+import {Box} from "@material-ui/core";
+
+
+const privateRoutes = () => {
+    return (
+        <Box>
+            <Switch>
+                <PrivateRoute component={HomePage} path="/home" exact={false}/>
+                <PrivateRoute component={SnakePage} path="/snake" exact={false}/>
+            </Switch>
+        </Box>
+    )
+}
 
 function App() {
   return (
       <BrowserRouter>
         <Switch>
-          <Route path="/" exact>
-            <LandingPage/>
-          </Route>
+            <Route path="/" exact>
+                <LandingPage/>
+            </Route>
             <Route path="/login">
                 <LoginPage/>
             </Route>
             <Route path="/register">
                 <RegisterPage/>
             </Route>
-            {/*TODO private route*/}
-            <Route path="/home">
-                <HomePage/>
-            </Route>
-            <Route path="/snek">
-                <SnekPage/>
-            </Route>
+            {privateRoutes()}
         </Switch>
       </BrowserRouter>
   );

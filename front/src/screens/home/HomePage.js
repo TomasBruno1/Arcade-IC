@@ -20,7 +20,7 @@ const HomePage = () => {
         {
             name: 'Snake',
             img: snake,
-            url: '/snek'
+            url: '/snake'
         },
         {
             name: 'Pacman',
@@ -31,13 +31,19 @@ const HomePage = () => {
 
     return (
         <div className="background">
+            <div className='buttons-position'>
+                <Button id='register-button' size={"large"} onClick={() => {
+                    window.sessionStorage.removeItem("user");
+                    history.push('/login')
+                }}>Log out</Button>
+            </div>
             <Box className='flex-box'>
                 <Box mt={5} id='form-box'>
                     <div className='title'>Welcome {name}!</div>
                     <Divider variant="middle" id='divider'/>
                     {games.map((item, index) => (
                         <div className='game-form'>
-                            <img src={item.img} className='game-img'/>
+                            <img src={item.img} className='game-img' alt={''}/>
                             <div className='game-title'>{item.name}</div>
                             <div className='button-group'>
                                 <Button id='game-button' onClick={() => history.push(item.url)}>Play</Button>
