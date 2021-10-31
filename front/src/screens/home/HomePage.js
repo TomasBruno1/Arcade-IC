@@ -1,29 +1,53 @@
 import './HomePage.css';
 import {useHistory} from "react-router-dom";
-import {Button} from "@material-ui/core";
-import {useEffect, useState} from "react";
+import {Box, Button, Divider} from "@material-ui/core";
+import React, {useEffect, useState} from "react";
+import pacman from '../../img/pacman.jpeg';
+import snake from '../../img/snake.png';
 
 const HomePage = () => {
 
     const history = useHistory();
 
-    const [ name, setName ] = useState("");
+    const [name, setName] = useState("");
 
     useEffect(() => {
         const user = sessionStorage.getItem("user")
         setName(user)
     }, [])
 
+    const games = [
+        {
+            name: 'Snake',
+            img: snake,
+            url: '/snek'
+        },
+        {
+            name: 'Pacman',
+            img: pacman,
+            url: ''
+        }
+    ]
 
     return (
         <div className="background">
-            <div className='buttons-position'>
-                <Button id='register-button' size={"large"}>Register</Button>
-                <Button id='login-button' size={"large"} onClick={() => history.push('/snek')}>Play Snek</Button>
-            </div>
-            <div className="welcomeText">Welcome to</div>
-            <div className="welcomeText" style={{color: '#0C45D9'}}>RetroMOVE</div>
-            <p className='description'> Home with username: {name} </p>
+            <Box className='flex-box'>
+                <Box mt={5} id='form-box'>
+                    <div className='title'>Welcome {name}!</div>
+                    <Divider variant="middle" id='divider'/>
+                    {games.map((item, index) => (
+                        <div className='game-form'>
+                            <img src={item.img} className='game-img'/>
+                            <div className='game-title'>{item.name}</div>
+                            <div className='button-group'>
+                                <Button id='game-button' onClick={() => history.push(item.url)}>Play</Button>
+                                <Button id='game-button'>Leaderboard</Button>
+                            </div>
+                        </div>
+                    ))}
+
+                </Box>
+            </Box>
         </div>
     )
 }
