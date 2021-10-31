@@ -30,17 +30,17 @@ const HomePage = () => {
     ]
 
     return (
-        <div className="background">
+        <div className="home-background">
             <div className='buttons-position'>
-                <Button id='register-button' size={"large"} onClick={() => {
+                <Button id='log-out-button' size={"large"} onClick={() => {
                     window.sessionStorage.removeItem("user");
                     history.push('/login')
                 }}>Log out</Button>
             </div>
-            <Box className='flex-box'>
-                <Box mt={5} id='form-box'>
+            <Box className='flex-box-home'>
+                <Box mt={5} id='form-home-box'>
                     <div className='title'>Welcome {name}!</div>
-                    <Divider variant="middle" id='divider'/>
+                    <Divider variant="middle" id='home-divider'/>
                     {games.map((item, index) => (
                         <div className='game-form'>
                             <img src={item.img} className='game-img' alt={''}/>
