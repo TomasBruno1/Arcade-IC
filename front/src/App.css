@@ -12,7 +12,15 @@
   background-position: center center;
   height: calc(120vh - 64px);
 }
-
+.home-background {
+  background-image: linear-gradient(rgba(0, 0, 0, 0.45), rgba(0, 0, 0, 0.45)),
+  url("./img/background2.jpg");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-position: center center;
+  height: calc(120vh - 64px);
+}
 .buttons-position {
   display: flex;
   flex-direction: row-reverse;

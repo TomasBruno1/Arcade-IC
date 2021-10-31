@@ -1,10 +1,11 @@
-import {Box, Button, Divider, FormHelperText} from "@material-ui/core";
+import {Box, Button, Divider, FormHelperText, Snackbar} from "@material-ui/core";
 import {useHistory} from "react-router-dom";
 import {FormGroup, Input} from "reactstrap";
 import {WebcamCapture} from "../../components/webcam/webcam";
-import React, {useEffect, useState} from "react";
+import React, {useState} from "react";
 import "./RegisterPage.css";
 import {userAPI} from "../../apis/userAPI";
+import {Alert} from "@material-ui/lab";
 
 const RegisterPage = () => {
 
@@ -15,9 +16,10 @@ const RegisterPage = () => {
     const [pictureError, setPictureError] = useState("")
     const [errorUsername, setErrorUsername] = useState(true)
     const [errorPicture, setErrorPicture] = useState(true)
+    const [signUpError, setSignUpError] = useState(false)
+    const [signUpErrorMessage, setSignUpErrorMessage] = useState("")
 
     const onSubmit = async () => {
-        console.log(username)
         if (username === "") {
             setUsernameError("* Username is required")
             setErrorUsername(true)
@@ -26,15 +28,19 @@ const RegisterPage = () => {
             setPictureError("* Picture is required")
             setErrorPicture(true)
         }
-        console.log(errorUsername)
-        console.log(errorPicture)
         if (errorUsername === false && errorPicture === false) {
             const formData = new FormData();
             formData.append("username", username)
             formData.append("image", picture)
-            console.log(formData)
             userAPI.postData(formData).then((response) =>  {
-                history.push('/login')
+                if(response === "Username is already taken") {
+                    setSignUpError(true)
+                    setSignUpErrorMessage(response)
+                }
+                else {
+                    setSignUpError(false)
+                    setSignUpErrorMessage("")
+                }
             })
         }
     }
@@ -55,10 +61,17 @@ const RegisterPage = () => {
                                     id="custom-button"
                                     placeholder=" Username"
                                     onChange={(text) => {
-                                        setUsername(text.target.value)
-                                        setUsernameError('')
-                                        if(text.target.value === "") setErrorUsername(true)
-                                        else setErrorUsername(false)
+                                        const name = text.target.value
+                                        if(/^[a-zA-Z0-9-_]+$/.test(name) === true){
+                                            setUsername(name)
+                                            setUsernameError('')
+                                            if(text.target.value === "") setErrorUsername(true)
+                                            else setErrorUsername(false)
+                                        }else{
+                                            setErrorUsername(true)
+                                            setUsernameError('* Invalid characters')
+                                        }
+
                                     }}
                                     name="username"
                                     error={(!!usernameError).toString()}
@@ -76,6 +89,19 @@ const RegisterPage = () => {
                             <Button id='create-account-button' onClick={onSubmit}>Create Account</Button>
                         </div>
                     </form>
+
+                    <Snackbar
+                        open={signUpError}
+                        autoHideDuration={6000}
+                        onClose={() => {
+                            setSignUpError(false)
+                            setSignUpErrorMessage("")
+                        }}
+                    >
+                        <Alert severity="error">
+                            Sign up was not successful: {signUpErrorMessage}
+                        </Alert>
+                    </Snackbar>
                 </Box>
             </Box>
         </div>

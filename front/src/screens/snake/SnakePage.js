@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import Food from "../../components/snek/food";
 import Snek from "../../components/snek/snek" ;
-import './SnekPage.css';
+import './SnakePage.css';
 
 const getRandomCoordinates = () => {
   let min = 1;
@@ -21,7 +21,7 @@ const initialState = {
   ]
 }
 
-class SnekPage extends Component {
+class SnakePage extends Component {
 
   state = initialState;
 
@@ -140,4 +140,4 @@ class SnekPage extends Component {
   }
 }
 
-export default SnekPage;
+export default SnakePage;

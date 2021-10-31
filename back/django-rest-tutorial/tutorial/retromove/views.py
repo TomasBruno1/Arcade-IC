@@ -34,7 +34,7 @@ def login_view(request):
         user = User.objects.get(username=username)
         login(request, user)
     except User.DoesNotExist:
-        return JsonResponse({'error': 'Invalid username'}, status=400)
+        return HttpResponse({'Invalid username'}, status=400)
 
     try:
         image_path = os.path.join(os.path.dirname(os.path.dirname(__file__)), 'media/photos/' + username + '.jpg')
@@ -49,6 +49,6 @@ def login_view(request):
         if True in matches:
             return JsonResponse({'username': user.username})
     except Exception as e:
-        return JsonResponse({'error': 'Invalid credentials'}, status=400)
+        return HttpResponse({'Invalid credentials'}, status=400)
 
-    return HttpResponse({'error': 'Invalid credentials'}, status=400)
+    return HttpResponse({'Invalid credentials'}, status=400)

@@ -1,33 +1,88 @@
-
-#login-button {
-    background: #0C45D9;
-    color: #fff;
-    border-radius: 20px;
-    margin: 10px;
-    text-transform: capitalize;
+.flex-box-home {
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
-#register-button {
+.title {
+    font-weight: bold;
+    padding-left: 20px;
+    padding-top: 40px;
+    padding-bottom: 0;
+    color: #ffffff;
+    font-size: 30px;
+    font-family: Roboto, sans-serif;
+}
+
+#form-home-box {
+    width: 700px;
+    height: 600px;
+    background: #0855EC 0 0 no-repeat padding-box;
+    border-radius: 20px;
+    opacity: 1;
+}
+
+#log-out-button {
     background: #0616A1;
     color: #fff;
     border-radius: 20px;
-    margin: 10px;
+    margin-top: 20px;
+    margin-right: 180px;
     text-transform: capitalize;
 }
 
-.welcomeText{
-    text-align: left;
-    margin-left: 4.5vw;
-    font-size: 85px;
-    font-weight: 500;
-    letter-spacing: -0.105vw;
-    color: #e3e8e6;
+#home-divider {
+    margin-top: 15px;
+    height: 2px;
+    margin-bottom: 60px;
+    background: #000000;
 }
 
-.description {
-    color: #fff;
-    margin-left: 4.5vw;
-    width: 70%;
-    margin-right: 4.5vw;
-    font-size: 22px;
+.game-form {
+    margin-left: 20px;
+    margin-right: 20px;
+    margin-bottom: 20px;
+    display: flex;
+    flex-direction: row;
+}
+
+.game-img {
+    width: 80px;
+    height: 80px;
+    border-radius: 7px;
+}
+
+.game-title {
+    background-color: #C4C4C4;
+    color: #000000;
+    border-radius: 25px;
+    width: 250px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    margin-left: 20px;
+    margin-right: 10px;
+    font-size: 26px;
+    font-family: Roboto, sans-serif;
+}
+
+.button-group {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#game-button {
+    color: #ffffff;
+    font-size: 16px;
+    margin-left: 10px;
+    margin-right: 5px;
+    background: #0C36C6;
+    text-transform: capitalize;
+    border-radius: 25px;
+    width: 140px;
+    height: 70px;
+    border: 2px solid black;
+    font-weight: bold;
 }

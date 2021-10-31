@@ -1,10 +1,11 @@
-import {Box, Button, Divider, FormHelperText} from "@material-ui/core";
+import {Box, Button, Divider, FormHelperText, Snackbar} from "@material-ui/core";
 import {useHistory} from "react-router-dom";
 import './LoginPage.css';
-import {FormGroup, Input} from 'reactstrap';
+import { FormGroup, Input} from 'reactstrap';
 import React, {useState} from "react";
 import {WebcamCapture} from '../../components/webcam/webcam'
 import {userAPI} from "../../apis/userAPI";
+import {Alert} from "@material-ui/lab";
 
 
 const LoginPage = () => {
@@ -17,7 +18,8 @@ const LoginPage = () => {
     const [pictureError, setPictureError] = useState("")
     const [errorUsername, setErrorUsername] = useState(true)
     const [errorPicture, setErrorPicture] = useState(true)
-    const [loginError, setLoginError] = useState(true)
+    const [loginError, setloginError] = useState(false)
+    const [loginErrorMessage, setloginErrorMessage] = useState("")
 
     const onSubmit = () => {
         if (username === "") {
@@ -26,12 +28,19 @@ const LoginPage = () => {
         if (picture === undefined) {
             setPictureError("* Picture is required")
         }
-        if(true) {
+        if(errorUsername === false && errorPicture === false) {
             const formData = new FormData();
             formData.append("username", username)
             formData.append("image", picture)
-            userAPI.loginData(formData).then((response) =>  {
-                console.log(response)
+            userAPI.loginData(formData).then(r => {
+                if(r ===  "Invalid credentials") {
+                    setloginError(true)
+                    setloginErrorMessage(r)
+                }
+                else {
+                    setloginError(false)
+                    setloginErrorMessage("")
+                }
             })
         }
 
@@ -51,7 +60,15 @@ const LoginPage = () => {
                         <div className='text-field'>
                             <FormGroup>
                                 <Input id="custom-button" placeholder=" Username"
-                                       onChange={(text) => setUsername(text.target.value)}/>
+                                       onChange={(text) => {
+                                           setUsername(text.target.value)
+                                           setUsernameError('')
+                                           if(text.target.value === "") setErrorUsername(true)
+                                           else setErrorUsername(false)
+                                       }}
+                                       name="username"
+                                       error={(!!usernameError).toString()}
+                                />
                                 <FormHelperText id='helper-text' error>{!!usernameError ? usernameError : ' '}</FormHelperText>
                             </FormGroup>
                         </div>
@@ -66,6 +83,19 @@ const LoginPage = () => {
                             <Button id='button' onClick={onSubmit}>Sign In</Button>
                         </div>
                     </form>
+
+                    <Snackbar
+                        open={loginError}
+                        autoHideDuration={6000}
+                        onClose={() => {
+                            setloginError(false)
+                            setloginErrorMessage("")
+                        }}
+                    >
+                        <Alert severity="error">
+                            Login was not successful: {loginErrorMessage}
+                        </Alert>
+                    </Snackbar>
                 </Box>
             </Box>
         </div>
