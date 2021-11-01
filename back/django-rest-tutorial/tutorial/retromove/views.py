@@ -1,6 +1,6 @@
 import os
 
-from django.contrib.auth import login
+from django.contrib.auth import login, logout
 from rest_framework import viewsets
 from django.contrib.auth.views import LoginView
 from django.http import HttpResponse, JsonResponse
@@ -52,3 +52,8 @@ def login_view(request):
         return HttpResponse({'Invalid credentials'}, status=400)
 
     return HttpResponse({'Invalid credentials'}, status=400)
+
+
+@api_view(["POST"])
+def logout_view(request):
+    logout(request)
