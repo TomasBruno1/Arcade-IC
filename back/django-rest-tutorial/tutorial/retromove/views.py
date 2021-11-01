@@ -1,6 +1,7 @@
 import os
 
 from django.contrib.auth import login, logout
+from django.contrib.auth.decorators import login_required
 from rest_framework import viewsets
 from django.contrib.auth.views import LoginView
 from django.http import HttpResponse, JsonResponse
@@ -17,12 +18,34 @@ class UserViewSet(viewsets.ModelViewSet):
     """
     queryset = User.objects.all()
     serializer_class = UserSerializer
+    user = User
 
     def post(self, request, *args, **kwargs):
         username = request.data['username']
         image = request.data['image']
         User.objects.create(username=username, image=image)
         return HttpResponse({'message': 'User created'}, status=201)
+
+    @login_required(login_url="/login")
+    def put(self, request, *args, **kwargs):
+        username = request.data['username']
+        snake = request.data['score_snake']
+        pacman = request.data['score_pacman']
+
+        try: user = User.objects.get(username=username)
+        except User.DoesNotExist:
+            return HttpResponse({'User does not exist'}, status=400)
+
+        if snake is not None:
+            if int(snake) > user.score_snake:
+                user.score_snake = snake
+
+        if pacman is not None:
+            if int(pacman) > user.score_pacman:
+                user.score_pacman = pacman
+
+        user.save()
+        return HttpResponse({'Score updated'}, status=200)
 
 
 @api_view(["POST"])
