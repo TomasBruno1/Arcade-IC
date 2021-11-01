@@ -25,7 +25,7 @@ const HomePage = () => {
         {
             name: 'Pacman',
             img: pacman,
-            url: ''
+            url: '/pacman'
         }
     ]
 
@@ -34,7 +34,7 @@ const HomePage = () => {
             <div className='buttons-position'>
                 <Button id='log-out-button' size={"large"} onClick={() => {
                     window.sessionStorage.removeItem("user");
-                    history.push('/login')
+                    history.push('/')
                 }}>Log out</Button>
             </div>
             <Box className='flex-box-home'>

@@ -14,6 +14,12 @@
   z-index: 2;
 }
 
+.go-back-button {
+  position: fixed;
+  right: 5px;
+  top: 5px
+}
+
 .snake-food {
   position: absolute;
   width: 2%;
@@ -23,6 +29,12 @@
   z-index: 1;
 }
 
+.flex-container-snake {
+  display: flex;
+  justify-content: center;
+  padding-top: 20px;
+}
+
 #snake-form-box{
   width: 650px;
   height: 650px;
@@ -30,4 +42,6 @@
   background: #0855EC 0 0 no-repeat padding-box;
   border-radius: 20px;
   opacity: 1;
+  position: fixed;
+
 }

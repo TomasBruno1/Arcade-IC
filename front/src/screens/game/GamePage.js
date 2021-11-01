@@ -5,17 +5,18 @@ import SnakeCard from "../../components/snek/snakeCard";
 import {useHistory} from "react-router-dom";
 
 
-const GamePage = () => {
+const GamePage = (props) => {
   const history = useHistory();
 
   return (
       <div className='background'>
-        <div className='buttons-position'>
+        <div className='go-back-button'>
           <Button id='register-button' size={"large"} onClick={() => history.push('/home')}>Go Back</Button>
         </div>
-        <Box className='flex-container'>
+        <Box className='flex-container-snake'>
           <Box id='snake-form-box'>
-            <SnakeCard/>
+              {window.location.pathname === '/snake' && <SnakeCard/>}
+              {/*{window.location.pathname === '/pacman' && <PacmanCard/>}*/}
           </Box>
         </Box>
       </div>

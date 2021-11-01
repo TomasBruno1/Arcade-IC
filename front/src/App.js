@@ -15,6 +15,7 @@ const privateRoutes = () => {
             <Switch>
                 <PrivateRoute component={HomePage} path="/home" exact={false}/>
                 <PrivateRoute component={GamePage} path="/snake" exact={false}/>
+                <PrivateRoute component={GamePage} path="/pacman" exact={false}/>
             </Switch>
         </Box>
     )
