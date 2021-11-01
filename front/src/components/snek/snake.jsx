@@ -1,5 +1,5 @@
 import React from 'react';
-import './snek.css'
+import './snake.css'
 
 export default (props) => {
   return (
@@ -10,7 +10,7 @@ export default (props) => {
           top: `${dot[1]}%`
         }
         return (
-          <div className="snake-dot" key={i} style={style}></div>
+          <div className="snake-dot" key={i} style={style}/>
         )
       })}
     </div>
