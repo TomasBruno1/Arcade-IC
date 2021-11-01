@@ -1,14 +1,13 @@
 .snake-container {
-  width: 100vw;
-  height: 100vh;
+  width: inherit;
+  height: inherit;
   display: flex;
   align-items: center;
   justify-content: center;
 }
 .grid {
-  width: 500px;
-  height: 500px;
-  margin: auto;
+  width: inherit;
+  height: inherit;
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;

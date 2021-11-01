@@ -8,6 +8,6 @@ export default (props) => {
   }
 
   return (
-    <div className="snake-food" style={style}></div>
+    <div className="snake-food" style={style}/>
   )
 }
