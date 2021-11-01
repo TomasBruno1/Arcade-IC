@@ -4,6 +4,8 @@ import {Box, Button, Divider} from "@material-ui/core";
 import React, {useEffect, useState} from "react";
 import pacman from '../../img/pacman.jpeg';
 import snake from '../../img/snake.png';
+import {userAPI} from "../../apis/userAPI";
+
 
 const HomePage = () => {
 
@@ -33,6 +35,7 @@ const HomePage = () => {
         <div className="home-background">
             <div className='buttons-position'>
                 <Button id='log-out-button' size={"large"} onClick={() => {
+                    userAPI.logoutData().then(r => r)
                     window.sessionStorage.removeItem("user");
                     history.push('/')
                 }}>Log out</Button>

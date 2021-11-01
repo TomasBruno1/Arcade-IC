@@ -31,7 +31,7 @@ class UserAPI {
         };
 
         let error = undefined
-        await fetch("http://127.0.0.1:8000/login/", requestOptions)
+        await fetch(`${url}/login/`, requestOptions)
           .then(response => {
               return response.json()})
           .then(result => {
@@ -41,6 +41,27 @@ class UserAPI {
           .catch(() => {
               error = "Invalid credentials"
           });
+        return error
+    }
+
+    logoutData = async () => {
+        const myHeaders = new Headers();
+        myHeaders.append("Cookie", "csrftoken=OD8OYJr0jJxVTKCWMvJUtLR1RCWRzrmTCMEFtvYWc5ktazrLkkd04F05qhOiUDAG; sessionid=choat2zzvkb4k5615ep0jcv46fvtzsjp");
+
+        const requestOptions = {
+            method: 'POST',
+            headers: myHeaders,
+            redirect: 'follow'
+        };
+
+        let error = undefined
+        await fetch(`${url}/logout/`, requestOptions)
+            .then(response => {
+                return response.json()})
+            .then(result => result)
+            .catch(() => {
+                error = "Invalid credentials"
+            });
         return error
     }
 
