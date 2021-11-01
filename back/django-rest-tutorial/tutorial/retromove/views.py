@@ -57,3 +57,4 @@ def login_view(request):
 @api_view(["POST"])
 def logout_view(request):
     logout(request)
+    return HttpResponse({'Logout successful'})
