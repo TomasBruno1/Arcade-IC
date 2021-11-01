@@ -47,7 +47,7 @@ const HomePage = () => {
                             <div className='game-title'>{item.name}</div>
                             <div className='button-group'>
                                 <Button id='game-button' onClick={() => history.push(item.url)}>Play</Button>
-                                <Button id='game-button'>Leaderboard</Button>
+                                <Button id='game-button' onClick={() => history.push('/leaderboard')}>Leaderboard</Button>
                             </div>
                         </div>
                     ))}
