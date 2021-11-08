@@ -7,6 +7,7 @@ import HomePage from "./screens/home/HomePage";
 import GamePage from "./screens/game/GamePage";
 import PrivateRoute from "./components/privateRoute/privateRoute";
 import {Box} from "@material-ui/core";
+import Leaderboard from "./screens/leaderboard/Leaderboard";
 
 
 const privateRoutes = () => {
@@ -16,6 +17,7 @@ const privateRoutes = () => {
                 <PrivateRoute component={HomePage} path="/home" exact={false}/>
                 <PrivateRoute component={GamePage} path="/snake" exact={false}/>
                 <PrivateRoute component={GamePage} path="/pacman" exact={false}/>
+                <PrivateRoute component={Leaderboard} path="/leaderboard" exact={false}/>
             </Switch>
         </Box>
     )
