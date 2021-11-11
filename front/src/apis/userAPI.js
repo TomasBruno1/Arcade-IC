@@ -65,6 +65,26 @@ class UserAPI {
         return error
     }
 
+    getData = async ( ) => {
+        const myHeaders = new Headers();
+        myHeaders.append("Cookie", "csrftoken=OD8OYJr0jJxVTKCWMvJUtLR1RCWRzrmTCMEFtvYWc5ktazrLkkd04F05qhOiUDAG; sessionid=choat2zzvkb4k5615ep0jcv46fvtzsjp");
+
+        const requestOptions = {
+            method: 'GET',
+            headers: myHeaders,
+            redirect: 'follow'
+        };
+
+        let array;
+        await fetch(`${url}/users/`, requestOptions)
+            .then(response => {
+                return response.json()})
+            .then(result => {
+                array = result.results
+            })
+        return array;
+    }
+
 
 }
 
