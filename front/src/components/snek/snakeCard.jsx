@@ -1,6 +1,7 @@
 import Snake from "./snake";
 import Food from "./food";
 import React, {Component} from "react";
+import {userAPI} from "../../apis/userAPI";
 
 const widthBox = 100
 
@@ -129,6 +130,10 @@ class SnakeCard extends Component{
     onGameOver() {
         alert(`Game Over. Snake length is ${this.state.snakeDots.length}`);
         this.setState(initialState)
+        const formData = new FormData();
+        formData.append("username", sessionStorage.getItem('user'))
+        formData.append("score_snake", this.state.snakeDots.length)
+        userAPI.putData(formData).then(r => r)
     }
 
     render() {

@@ -1,7 +1,7 @@
 import {Box, Button, Divider, FormHelperText, Snackbar} from "@material-ui/core";
 import {useHistory} from "react-router-dom";
 import './LoginPage.css';
-import { FormGroup, Input} from 'reactstrap';
+import {FormGroup, Input} from 'reactstrap';
 import React, {useState} from "react";
 import {WebcamCapture} from '../../components/webcam/webcam'
 import {userAPI} from "../../apis/userAPI";
@@ -28,16 +28,15 @@ const LoginPage = () => {
         if (picture === undefined) {
             setPictureError("* Picture is required")
         }
-        if(errorUsername === false && errorPicture === false) {
+        if (errorUsername === false && errorPicture === false) {
             const formData = new FormData();
             formData.append("username", username)
             formData.append("image", picture)
             userAPI.loginData(formData).then(r => {
-                if(r ===  "Invalid credentials") {
+                if (r === "Invalid credentials") {
                     setloginError(true)
                     setloginErrorMessage(r)
-                }
-                else {
+                } else {
                     setloginError(false)
                     setloginErrorMessage("")
                 }
@@ -63,16 +62,18 @@ const LoginPage = () => {
                                        onChange={(text) => {
                                            setUsername(text.target.value)
                                            setUsernameError('')
-                                           if(text.target.value === "") setErrorUsername(true)
+                                           if (text.target.value === "") setErrorUsername(true)
                                            else setErrorUsername(false)
                                        }}
                                        name="username"
                                        error={(!!usernameError).toString()}
                                 />
-                                <FormHelperText id='helper-text' error>{!!usernameError ? usernameError : ' '}</FormHelperText>
+                                <FormHelperText id='helper-text'
+                                                error>{!!usernameError ? usernameError : ' '}</FormHelperText>
                             </FormGroup>
                         </div>
-                        <WebcamCapture setPicture={setPicture} setPictureError={setPictureError} error={pictureError} user={username} setErrorPicture={setErrorPicture}/>
+                        <WebcamCapture setPicture={setPicture} setPictureError={setPictureError} error={pictureError}
+                                       user={username} setErrorPicture={setErrorPicture}/>
                         <FormHelperText id='picture-text' error>{!!pictureError ? pictureError : ' '}</FormHelperText>
 
                         <div className='suggest-text'>Do not have an account?

@@ -18,6 +18,11 @@
     margin-bottom: 20px;
 }
 
+.title-leaderboard-box {
+    display: flex;
+    justify-content: space-around;
+}
+
 .title-leaderboard {
     font-family: Roboto, sans-serif;
     font-size: 24px;
@@ -81,8 +86,5 @@
 }
 
 .go-home-button {
-    display: flex;
-    flex-direction: row-reverse;
-    margin-right: 30px;
-    margin-top: 70px;
+    margin-top: 30px;
 }
