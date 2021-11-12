@@ -7,21 +7,30 @@ import PacmanCard from "../../components/pacman/pacmanCard";
 
 
 const GamePage = (props) => {
-  const history = useHistory();
+    const history = useHistory();
 
-  return (
-      <div className='background'>
-        <div className='go-back-button'>
-          <Button id='register-button' size={"large"} onClick={() => history.push('/home')}>Go Back</Button>
+    return (
+        <div className='background'>
+            <div className='go-back-button'>
+                <Button id='register-button' size={"large"} onClick={() => history.push('/home')}>Go Back</Button>
+            </div>
+            {window.location.pathname === '/snake' &&
+            <Box className='flex-container-snake'>
+                <Box id='snake-form-box'>
+                    <SnakeCard/>
+                </Box>
+            </Box>
+            }
+            {window.location.pathname === '/pacman' &&
+            <Box className='flex-container-pacman'>
+                <Box id='pacman-form-box'>
+                    <PacmanCard/>
+                </Box>
+            </Box>
+            }
+
         </div>
-        <Box className='flex-container-snake'>
-          <Box id='snake-form-box'>
-              {window.location.pathname === '/snake' && <SnakeCard/>}
-              {window.location.pathname === '/pacman' && <PacmanCard />}
-          </Box>
-        </Box>
-      </div>
-  )
+    )
 }
 
 export default GamePage;

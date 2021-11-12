@@ -99,9 +99,8 @@ class UserAPI {
 
         await fetch(`${url}/users/`, requestOptions)
             .then(response => {
-                return response.json()})
-            .then(result => {
-            })
+                return response})
+
     }
 
 
