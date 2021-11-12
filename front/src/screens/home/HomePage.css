@@ -14,9 +14,18 @@
     font-family: Roboto, sans-serif;
 }
 
+.name-game {
+    font-weight: bold;
+    padding-top: 40px;
+    padding-bottom: 0;
+    color: #ffffff;
+    font-style: italic;
+    font-size: 30px;
+    font-family: Roboto, sans-serif;
+}
+
 #form-home-box {
     width: 700px;
-    height: 600px;
     background: #0855EC 0 0 no-repeat padding-box;
     border-radius: 20px;
     opacity: 1;

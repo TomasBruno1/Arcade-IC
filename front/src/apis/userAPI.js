@@ -19,6 +19,7 @@ class UserAPI {
         return error
     }
 
+
     loginData = async ( data = {}) => {
         const myHeaders = new Headers();
         myHeaders.append("Cookie", "csrftoken=OD8OYJr0jJxVTKCWMvJUtLR1RCWRzrmTCMEFtvYWc5ktazrLkkd04F05qhOiUDAG; sessionid=choat2zzvkb4k5615ep0jcv46fvtzsjp");
@@ -32,15 +33,15 @@ class UserAPI {
 
         let error = undefined
         await fetch(`${url}/login/`, requestOptions)
-          .then(response => {
-              return response.json()})
-          .then(result => {
-              window.sessionStorage.setItem("user", result.username)
-              window.location.replace("/home")
-          })
-          .catch(() => {
-              error = "Invalid credentials"
-          });
+            .then(response => {
+                return response.json()})
+            .then(result => {
+                window.sessionStorage.setItem("user", result.username)
+                window.location.replace("/home")
+            })
+            .catch(() => {
+                error = "Invalid credentials"
+            });
         return error
     }
 
@@ -65,6 +66,44 @@ class UserAPI {
         return error
     }
 
+    getData = async ( ) => {
+        const myHeaders = new Headers();
+        myHeaders.append("Cookie", "csrftoken=OD8OYJr0jJxVTKCWMvJUtLR1RCWRzrmTCMEFtvYWc5ktazrLkkd04F05qhOiUDAG; sessionid=choat2zzvkb4k5615ep0jcv46fvtzsjp");
+
+        const requestOptions = {
+            method: 'GET',
+            headers: myHeaders,
+            redirect: 'follow'
+        };
+
+        let array;
+        await fetch(`${url}/users/`, requestOptions)
+            .then(response => {
+                return response.json()})
+            .then(result => {
+                array = result.results
+            })
+        return array;
+    }
+
+    putData = async ( data = {}) => {
+        const myHeaders = new Headers();
+        myHeaders.append("Cookie", "csrftoken=OD8OYJr0jJxVTKCWMvJUtLR1RCWRzrmTCMEFtvYWc5ktazrLkkd04F05qhOiUDAG; sessionid=choat2zzvkb4k5615ep0jcv46fvtzsjp");
+
+        const requestOptions = {
+            method: 'PUT',
+            headers: myHeaders,
+            body: data,
+            redirect: 'follow'
+        };
+
+        await fetch(`${url}/users/`, requestOptions)
+            .then(response => {
+                return response.json()})
+            .then(result => {
+            })
+    }
+
 
 }
 
@@ -72,7 +111,7 @@ export const userAPI = new UserAPI();
 
 // function getCookie(name) {
 //     let cookieValue = null;
-//     if (document.cookie && document.cookie !== '') {
+//     if (documePUTookie && document.cookie !== '') {
 //         const cookies = document.cookie.split(';');
 //         for (let i = 0; i < cookies.length; i++) {
 //             const cookie = cookies[i].trim();

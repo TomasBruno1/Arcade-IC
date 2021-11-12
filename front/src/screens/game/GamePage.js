@@ -3,6 +3,7 @@ import './GamePage.css';
 import {Box, Button} from "@material-ui/core";
 import SnakeCard from "../../components/snek/snakeCard";
 import {useHistory} from "react-router-dom";
+import PacmanCard from "../../components/pacman/pacmanCard";
 
 
 const GamePage = (props) => {
@@ -16,7 +17,7 @@ const GamePage = (props) => {
         <Box className='flex-container-snake'>
           <Box id='snake-form-box'>
               {window.location.pathname === '/snake' && <SnakeCard/>}
-              {/*{window.location.pathname === '/pacman' && <PacmanCard/>}*/}
+              {window.location.pathname === '/pacman' && <PacmanCard />}
           </Box>
         </Box>
       </div>
