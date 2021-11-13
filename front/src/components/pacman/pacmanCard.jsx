@@ -6,10 +6,12 @@
  ***/
 
 
+import Pacman from "./index";
+
 const PacmanCard = () => {
     return (
-        <div>
-
+        <div >
+            <Pacman />
         </div>
     )
 }

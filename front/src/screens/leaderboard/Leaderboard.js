@@ -16,7 +16,6 @@ function Leaderboard() {
         userAPI.getData().then(res => {
             getPositions(res)
         })
-        console.log(game)
     }, [])
 
     const getPositions = (response) => {
@@ -49,10 +48,9 @@ function Leaderboard() {
         }
         else {
             taked = sorted.slice(0, 4)
-            console.log(taked)
             const pos = sorted.map(u => u.username).indexOf(sessionStorage.getItem('user'))
             setUserPos(pos + 1)
-            const user = sorted.map(u => u.username).find(u => u.username === sessionStorage.getItem('user'))
+            const user = sorted.find(u => u.username === sessionStorage.getItem('user'))
             taked = [...taked, user]
             setUsers(taked)
         }

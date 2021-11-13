@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import './GamePage.css';
 import {Box, Button} from "@material-ui/core";
 import SnakeCard from "../../components/snek/snakeCard";
@@ -7,21 +7,36 @@ import PacmanCard from "../../components/pacman/pacmanCard";
 
 
 const GamePage = (props) => {
-  const history = useHistory();
+    const history = useHistory();
+    const [score, setScore] = useState(0);
+    const [gameOver, setGameOver] = useState(false);
 
-  return (
-      <div className='background'>
-        <div className='go-back-button'>
-          <Button id='register-button' size={"large"} onClick={() => history.push('/home')}>Go Back</Button>
+    return (
+        <div className='background'>
+            <div className='go-back-button'>
+                <Button id='register-button' size={"large"} onClick={() => history.push('/home')}>Go Back</Button>
+            </div>
+            {window.location.pathname === '/snake' &&
+            <Box className='flex-container-snake'>
+                <div style={{display: 'flex', flexDirection: 'row', position: 'fixed'}}>
+                    <div className={'snake-score'}>Score: {score}</div>
+                    {gameOver && <div className={'snake-score'}>Game Over!</div>}
+                </div>
+                <Box id='snake-form-box'>
+                    <SnakeCard setScore={setScore} setGameOver={setGameOver} gameOver={gameOver}/>
+                </Box>
+            </Box>
+            }
+            {window.location.pathname === '/pacman' &&
+            <Box className='flex-container-pacman'>
+                <Box id='pacman-form-box'>
+                    <PacmanCard/>
+                </Box>
+            </Box>
+            }
+
         </div>
-        <Box className='flex-container-snake'>
-          <Box id='snake-form-box'>
-              {window.location.pathname === '/snake' && <SnakeCard/>}
-              {window.location.pathname === '/pacman' && <PacmanCard />}
-          </Box>
-        </Box>
-      </div>
-  )
+    )
 }
 
 export default GamePage;
