@@ -19,12 +19,13 @@
   background-repeat: no-repeat;
   background-attachment: fixed;
   background-position: center center;
-  height: calc(120vh - 64px);
+  height: calc(110vh - 64px);
 }
 
 .buttons-position {
   display: flex;
   flex-direction: row-reverse;
+  padding-top: 15px;
 }
 
 #go-back-button {

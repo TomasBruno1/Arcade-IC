@@ -6,6 +6,26 @@ const LandingPage = () => {
 
     const history = useHistory();
 
+    const developers = [
+        {
+            name: "Tomás Berretta",
+            github: "https://github.com/tomasberretta"
+        },
+        {
+            name: "Tomás Bruno",
+            github: "https://github.com/TomasBruno1"
+        },
+        {
+            name: "Catalina Mendizabal",
+            github: "https://github.com/CatalinaMendizabal"
+        },
+        {
+            name: "Numa Leone Elizalde",
+            github: "https://github.com/NumaLeoneElizalde"
+        },
+    ]
+
+
     return (
         <div className="background">
             <div className='buttons-position'>
@@ -14,12 +34,18 @@ const LandingPage = () => {
             </div>
             <div className="welcomeText">Welcome to</div>
             <div className="welcomeText" style={{color: '#0C45D9'}}>RetroMOVE</div>
-            <p className='description'> RetroMove is a ... Lorem Ipsum is simply dummy text of the printing and typesetting industry.
-                Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a
-                galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the
-                leap into electronic typesetting, remaining essentially unchanged.</p>
+            <p className='description'> RetroMove is a gaming platform where you can play using your WebCam as
+                input and test your motor skills with players all around the globe.</p>
+            <div className='description-dev'>Developed by:</div>
+            {developers.map((item, index) => (
+                <div style={{marginBottom: 8}}>
+                    <a href={item.github} className={'link-users'}>- {item.name}</a>
+                </div>
+            ))}
+
+
         </div>
-        )
+    )
 }
 
 export default LandingPage;

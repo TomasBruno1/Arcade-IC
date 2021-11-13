@@ -44,6 +44,7 @@
 #snake-form-box {
     width: 650px;
     height: 650px;
+    margin-top: 40px;
     padding: 15px;
     background: #0855EC 0 0 no-repeat padding-box;
     border-radius: 20px;
@@ -59,3 +60,11 @@
     opacity: 1;
     position: fixed;
 }
+
+.snake-score {
+    color: #ffffff;
+    font-family: Hack, monospace;
+    margin-left: 30px;
+    font-size: 18px;
+}
+

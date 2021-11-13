@@ -2,30 +2,39 @@ import Snake from "./snake";
 import Food from "./food";
 import React, {Component} from "react";
 import {userAPI} from "../../apis/userAPI";
+import {Button} from "@material-ui/core";
+import './snake.css';
 
 const widthBox = 100
 
 
 const getRandomCoordinates = () => {
     let min = 1
-    let max = widthBox-2;
-    let x = Math.floor((Math.random()*(max-min+1)+min)/2)*2;
-    let y =  Math.floor((Math.random()*(max-min+1)+min)/2)*2;
-    return [x,y]
+    let max = widthBox - 2;
+    let x = Math.floor((Math.random() * (max - min + 1) + min) / 2) * 2;
+    let y = Math.floor((Math.random() * (max - min + 1) + min) / 2) * 2;
+    return [x, y]
 }
+
+
 
 const initialState = {
     food: getRandomCoordinates(),
-    speed: 180,
+    speed: 125, //180
     direction: 'RIGHT',
+    score: 0,
     snakeDots: [
-        [0,0],
-        [2,0]
+        [0, 0],
+        [2, 0]
     ]
 }
 
-class SnakeCard extends Component{
+class SnakeCard extends Component {
     state = initialState;
+
+    constructor(props) {
+        super(props);
+    }
 
     componentDidMount() {
         setInterval(this.moveSnake, this.state.speed);
@@ -57,28 +66,31 @@ class SnakeCard extends Component{
     }
 
     moveSnake = () => {
-        let dots = [...this.state.snakeDots];
-        let head = dots[dots.length - 1];
+        if(!this.props.gameOver){
+            let dots = [...this.state.snakeDots];
+            let head = dots[dots.length - 1];
 
-        switch (this.state.direction) {
-            case 'RIGHT':
-                head = [head[0] + 2, head[1]];
-                break;
-            case 'LEFT':
-                head = [head[0] - 2, head[1]];
-                break;
-            case 'DOWN':
-                head = [head[0], head[1] + 2];
-                break;
-            case 'UP':
-                head = [head[0], head[1] - 2];
-                break;
+            switch (this.state.direction) {
+                case 'RIGHT':
+                    head = [head[0] + 2, head[1]];
+                    break;
+                case 'LEFT':
+                    head = [head[0] - 2, head[1]];
+                    break;
+                case 'DOWN':
+                    head = [head[0], head[1] + 2];
+                    break;
+                case 'UP':
+                    head = [head[0], head[1] - 2];
+                    break;
+            }
+            dots.push(head);
+            dots.shift();
+            this.setState({
+                snakeDots: dots
+            })
         }
-        dots.push(head);
-        dots.shift();
-        this.setState({
-            snakeDots: dots
-        })
+
     }
 
     checkIfOutOfBorders() {
@@ -104,7 +116,7 @@ class SnakeCard extends Component{
         let food = this.state.food;
         if (head[0] === food[0] && head[1] === food[1]) {
             this.setState({
-                food: getRandomCoordinates()
+                food: getRandomCoordinates(),
             })
             this.enlargeSnake();
             this.increaseSpeed();
@@ -115,8 +127,10 @@ class SnakeCard extends Component{
         let newSnake = [...this.state.snakeDots];
         newSnake.unshift([])
         this.setState({
-            snakeDots: newSnake
+            snakeDots: newSnake,
+            score: this.state.score + 1
         })
+        this.props.setScore(this.state.score + 1)
     }
 
     increaseSpeed() {
@@ -128,11 +142,10 @@ class SnakeCard extends Component{
     }
 
     onGameOver() {
-        alert(`Game Over. Snake length is ${this.state.snakeDots.length}`);
-        this.setState(initialState)
+        this.props.setGameOver(true)
         const formData = new FormData();
         formData.append("username", sessionStorage.getItem('user'))
-        formData.append("score_snake", this.state.snakeDots.length)
+        formData.append("score_snake", this.state.snakeDots.length - 2)
         userAPI.putData(formData).then(r => r)
     }
 
@@ -140,9 +153,18 @@ class SnakeCard extends Component{
         return (
             <div className="game-area">
                 <Snake snakeDots={this.state.snakeDots}/>
+                {this.props.gameOver && <div className={'game-over-snake'}>
+                    <Button variant={'outlined'} id={'refresh-button'} onClick={() => {
+                        this.setState(initialState)
+                        this.props.setGameOver(false)
+                        this.props.setScore(0)
+                    }}>Play Again!</Button>
+                </div>
+                }
                 <Food dot={this.state.food}/>
             </div>
         );
     }
 }
+
 export default SnakeCard;

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import './GamePage.css';
 import {Box, Button} from "@material-ui/core";
 import SnakeCard from "../../components/snek/snakeCard";
@@ -8,6 +8,8 @@ import PacmanCard from "../../components/pacman/pacmanCard";
 
 const GamePage = (props) => {
     const history = useHistory();
+    const [score, setScore] = useState(0);
+    const [gameOver, setGameOver] = useState(false);
 
     return (
         <div className='background'>
@@ -16,8 +18,12 @@ const GamePage = (props) => {
             </div>
             {window.location.pathname === '/snake' &&
             <Box className='flex-container-snake'>
+                <div style={{display: 'flex', flexDirection: 'row', position: 'fixed'}}>
+                    <div className={'snake-score'}>Score: {score}</div>
+                    {gameOver && <div className={'snake-score'}>Game Over!</div>}
+                </div>
                 <Box id='snake-form-box'>
-                    <SnakeCard/>
+                    <SnakeCard setScore={setScore} setGameOver={setGameOver} gameOver={gameOver}/>
                 </Box>
             </Box>
             }
