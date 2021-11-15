@@ -29,18 +29,18 @@ class UserViewSet(viewsets.ModelViewSet):
     @login_required(login_url="/login")
     def put(self, request, *args, **kwargs):
         username = request.data['username']
-        snake = request.data['score_snake']
-        pacman = request.data['score_pacman']
+        snake = request.POST.get('score_snake', False)
+        pacman = request.POST.get('score_pacman', False)
 
         try: user = User.objects.get(username=username)
         except User.DoesNotExist:
             return HttpResponse({'User does not exist'}, status=400)
 
-        if snake is not None:
+        if snake:
             if int(snake) > user.score_snake:
                 user.score_snake = snake
 
-        if pacman is not None:
+        if pacman:
             if int(pacman) > user.score_pacman:
                 user.score_pacman = pacman
 
