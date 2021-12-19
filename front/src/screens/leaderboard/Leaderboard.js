@@ -13,46 +13,25 @@ function Leaderboard() {
 
 
     useEffect(() => {
-        userAPI.getData().then(res => {
+        userAPI.getData(game).then(res => {
             getPositions(res)
         })
     }, [])
 
     const getPositions = (response) => {
-        const filtered = response.filter(u => u.username !== 'admin')
-        let sorted;
-        if (game === 'snake') sorted = filtered.sort((a,b) =>{
-            if (a.score_snake < b.score_snake) {
-                return 1;
-            }
-            if (a.score_snake > b.score_snake) {
-                return -1;
-            }
-            return 0;
-        })
-        else sorted = filtered.sort((a,b) =>{
-            if ( a.score_pacman< b.score_pacman ){
-                return 1;
-            }
-            if ( a.score_pacman > b.score_pacman ){
-                return -1;
-            }
-            return 0;
-        })
-
-        let taked = sorted.slice(0, 5)
-        if (taked.find(u => u.username === sessionStorage.getItem('user')) !== undefined) {
-            setUsers(taked)
+        const sorted = response.filter(u => u.username !== 'admin')
+        let taken = sorted.slice(0, 5)
+        if (taken.find(u => u.username === sessionStorage.getItem('user')) !== undefined) {
+            setUsers(taken)
             const pos = sorted.map(u => u.username).indexOf(sessionStorage.getItem('user'))
             setUserPos(pos + 1)
-        }
-        else {
-            taked = sorted.slice(0, 4)
+        } else {
+            taken = sorted.slice(0, 4)
             const pos = sorted.map(u => u.username).indexOf(sessionStorage.getItem('user'))
             setUserPos(pos + 1)
             const user = sorted.find(u => u.username === sessionStorage.getItem('user'))
-            taked = [...taked, user]
-            setUsers(taked)
+            taken = [...taken, user]
+            setUsers(taken)
         }
     }
 
@@ -61,7 +40,9 @@ function Leaderboard() {
             <Box className='flex-box-home'>
                 <Box mt={5} id='form-home-box'>
                     <div className={'title-leaderboard-box'}>
-                        <div className='title'>Leaderboard: {game === 'snake' ? <span className={'name-game'}>Snake</span> : <span className={'name-game'}>Pacman</span> }</div>
+                        <div className='title'>Leaderboard: {game === 'snake' ?
+                            <span className={'name-game'}>Snake</span> : <span className={'name-game'}>Pacman</span> }
+                        </div>
                         <div className={'go-home-button'}>
                             <Button id='go-home' onClick={() => history.push('/home')}>Go Home</Button>
                         </div>

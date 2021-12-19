@@ -38,7 +38,9 @@ const HomePage = () => {
                     userAPI.logoutData().then(r => r)
                     window.sessionStorage.removeItem("user");
                     history.push('/')
-                }}>Log out</Button>
+                }}>
+                    Log out
+                </Button>
             </div>
             <Box className='flex-box-home'>
                 <Box mt={5} id='form-home-box'>
@@ -49,12 +51,15 @@ const HomePage = () => {
                             <img src={item.img} className='game-img' alt={''}/>
                             <div className='game-title'>{item.name}</div>
                             <div className='button-group'>
-                                <Button id='game-button' onClick={() => history.push(item.url)}>Play</Button>
-                                <Button id='game-button' onClick={() => history.push(`/leaderboard/${item.name.toLowerCase()}`)}>Leaderboard</Button>
+                                <Button id='game-button'
+                                        onClick={() => history.push(item.url)}>Play</Button>
+                                <Button id='game-button'
+                                        onClick={() => history.push(`/leaderboard/${item.name.toLowerCase()}`)}>
+                                    Leaderboard
+                                </Button>
                             </div>
                         </div>
                     ))}
-
                 </Box>
             </Box>
         </div>

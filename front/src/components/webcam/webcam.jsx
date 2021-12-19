@@ -69,8 +69,7 @@ export const WebcamCapture = (props) => {
                         onClick={(e) => {
                             e.preventDefault();
                             capture();
-                        }}>Capture</Button>
-                }
+                        }}>Capture</Button>}
             </div>
         </>
 

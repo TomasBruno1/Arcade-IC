@@ -1,4 +1,5 @@
-const url = "http://127.0.0.1:8000"
+const url = "http://127.0.0.1:8000";
+const cookie = "csrftoken=OD8OYJr0jJxVTKCWMvJUtLR1RCWRzrmTCMEFtvYWc5ktazrLkkd04F05qhOiUDAG; sessionid=choat2zzvkb4k5615ep0jcv46fvtzsjp";
 
 class UserAPI {
 
@@ -22,7 +23,7 @@ class UserAPI {
 
     loginData = async ( data = {}) => {
         const myHeaders = new Headers();
-        myHeaders.append("Cookie", "csrftoken=OD8OYJr0jJxVTKCWMvJUtLR1RCWRzrmTCMEFtvYWc5ktazrLkkd04F05qhOiUDAG; sessionid=choat2zzvkb4k5615ep0jcv46fvtzsjp");
+        myHeaders.append("Cookie", cookie);
 
         const requestOptions = {
             method: 'POST',
@@ -47,7 +48,7 @@ class UserAPI {
 
     logoutData = async () => {
         const myHeaders = new Headers();
-        myHeaders.append("Cookie", "csrftoken=OD8OYJr0jJxVTKCWMvJUtLR1RCWRzrmTCMEFtvYWc5ktazrLkkd04F05qhOiUDAG; sessionid=choat2zzvkb4k5615ep0jcv46fvtzsjp");
+        myHeaders.append("Cookie", cookie);
 
         const requestOptions = {
             method: 'POST',
@@ -66,9 +67,9 @@ class UserAPI {
         return error
     }
 
-    getData = async ( ) => {
+    getData = async (game) => {
         const myHeaders = new Headers();
-        myHeaders.append("Cookie", "csrftoken=OD8OYJr0jJxVTKCWMvJUtLR1RCWRzrmTCMEFtvYWc5ktazrLkkd04F05qhOiUDAG; sessionid=choat2zzvkb4k5615ep0jcv46fvtzsjp");
+        myHeaders.append("Cookie", cookie);
 
         const requestOptions = {
             method: 'GET',
@@ -77,18 +78,18 @@ class UserAPI {
         };
 
         let array;
-        await fetch(`${url}/users/`, requestOptions)
+        await fetch(`${url}/users/?game=${game}`, requestOptions)
             .then(response => {
                 return response.json()})
             .then(result => {
-                array = result.results
+                array = result
             })
         return array;
     }
 
     putData = async ( data = {}) => {
         const myHeaders = new Headers();
-        myHeaders.append("Cookie", "csrftoken=OD8OYJr0jJxVTKCWMvJUtLR1RCWRzrmTCMEFtvYWc5ktazrLkkd04F05qhOiUDAG; sessionid=choat2zzvkb4k5615ep0jcv46fvtzsjp");
+        myHeaders.append("Cookie", cookie);
 
         const requestOptions = {
             method: 'PUT',
@@ -96,30 +97,11 @@ class UserAPI {
             body: data,
             redirect: 'follow'
         };
-
-        await fetch(`${url}/users/`, requestOptions)
-            .then(response => {
-                return response})
-
+        await fetch(`${url}/users/`, requestOptions).then(response => {
+                return response
+        })
     }
-
-
 }
 
 export const userAPI = new UserAPI();
 
-// function getCookie(name) {
-//     let cookieValue = null;
-//     if (documePUTookie && document.cookie !== '') {
-//         const cookies = document.cookie.split(';');
-//         for (let i = 0; i < cookies.length; i++) {
-//             const cookie = cookies[i].trim();
-//             // Does this cookie string begin with the name we want?
-//             if (cookie.substring(0, name.length + 1) === (name + '=')) {
-//                 cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
-//                 break;
-//             }
-//         }
-//     }
-//     return cookieValue;
-// }

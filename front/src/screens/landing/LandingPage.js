@@ -25,7 +25,6 @@ const LandingPage = () => {
         },
     ]
 
-
     return (
         <div className="background">
             <div className='buttons-position'>

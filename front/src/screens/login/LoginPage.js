@@ -7,44 +7,39 @@ import {WebcamCapture} from '../../components/webcam/webcam'
 import {userAPI} from "../../apis/userAPI";
 import {Alert} from "@material-ui/lab";
 
-
 const LoginPage = () => {
 
     const history = useHistory();
 
     const [username, setUsername] = useState("")
     const [picture, setPicture] = useState()
-    const [usernameError, setUsernameError] = useState("")
-    const [pictureError, setPictureError] = useState("")
+    const [usernameErrorMsg, setUsernameErrorMsg] = useState("")
+    const [pictureErrorMsg, setPictureErrorMsg] = useState("")
     const [errorUsername, setErrorUsername] = useState(true)
     const [errorPicture, setErrorPicture] = useState(true)
-    const [loginError, setloginError] = useState(false)
-    const [loginErrorMessage, setloginErrorMessage] = useState("")
+    const [loginError, setLoginError] = useState(false)
+    const [loginErrorMessage, setLoginErrorMsg] = useState("")
 
     const onSubmit = () => {
-        if (username === "") {
-            setUsernameError("* Username is required")
-        }
-        if (picture === undefined) {
-            setPictureError("* Picture is required")
-        }
+        if (username === "") setUsernameErrorMsg("* Username is required")
+
+        if (picture === undefined) setPictureErrorMsg("* Picture is required")
+
         if (errorUsername === false && errorPicture === false) {
             const formData = new FormData();
             formData.append("username", username)
             formData.append("image", picture)
             userAPI.loginData(formData).then(r => {
                 if (r === "Invalid credentials") {
-                    setloginError(true)
-                    setloginErrorMessage(r)
+                    setLoginError(true)
+                    setLoginErrorMsg(r)
                 } else {
-                    setloginError(false)
-                    setloginErrorMessage("")
+                    setLoginError(false)
+                    setLoginErrorMsg("")
                 }
             })
         }
-
     }
-
 
     return (
         <div className='background'>
@@ -61,21 +56,23 @@ const LoginPage = () => {
                                 <Input id="custom-button" placeholder=" Username"
                                        onChange={(text) => {
                                            setUsername(text.target.value)
-                                           setUsernameError('')
+                                           setUsernameErrorMsg('')
                                            if (text.target.value === "") setErrorUsername(true)
                                            else setErrorUsername(false)
                                        }}
                                        name="username"
-                                       error={(!!usernameError).toString()}
+                                       error={(!!usernameErrorMsg).toString()}
                                 />
-                                <FormHelperText id='helper-text'
-                                                error>{!!usernameError ? usernameError : ' '}</FormHelperText>
+                                <FormHelperText id='helper-text' error>
+                                    {!!usernameErrorMsg ? usernameErrorMsg : ' '}
+                                </FormHelperText>
                             </FormGroup>
                         </div>
-                        <WebcamCapture setPicture={setPicture} setPictureError={setPictureError} error={pictureError}
+                        <WebcamCapture setPicture={setPicture} setPictureError={setPictureErrorMsg} error={pictureErrorMsg}
                                        user={username} setErrorPicture={setErrorPicture}/>
-                        <FormHelperText id='picture-text' error>{!!pictureError ? pictureError : ' '}</FormHelperText>
-
+                        <FormHelperText id='picture-text' error>
+                            {!!pictureErrorMsg ? pictureErrorMsg : ' '}
+                        </FormHelperText>
                         <div className='suggest-text'>Do not have an account?
                             <span className='link-text'
                                   onClick={() => history.push('/register')}>Register in here!</span>
@@ -84,15 +81,13 @@ const LoginPage = () => {
                             <Button id='button' onClick={onSubmit}>Sign In</Button>
                         </div>
                     </form>
-
                     <Snackbar
                         open={loginError}
                         autoHideDuration={6000}
                         onClose={() => {
-                            setloginError(false)
-                            setloginErrorMessage("")
-                        }}
-                    >
+                            setLoginError(false)
+                            setLoginErrorMsg("")
+                        }}>
                         <Alert severity="error">
                             Login was not successful: {loginErrorMessage}
                         </Alert>
@@ -101,6 +96,6 @@ const LoginPage = () => {
             </Box>
         </div>
     )
-
 }
+
 export default LoginPage;
