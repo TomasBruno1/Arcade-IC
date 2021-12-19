@@ -47,8 +47,9 @@ class UserViewSet(viewsets.ModelViewSet):
         user.save()
         return HttpResponse({'Score updated'}, status=200)
 
+    @login_required(login_url="/login")
     def list(self, request, *args, **kwargs):
-        game = request.data['game']
+        game = request.GET.get('game', '')
         data = list(User.objects.order_by('-score_'+game).values('username', 'score_'+game))
         return JsonResponse(data, safe=False)
 
