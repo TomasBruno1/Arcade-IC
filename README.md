@@ -1,57 +1,61 @@
-# Retro Move
-Introducción a la computación python project by [TomasBruno1](https://github.com/TomasBruno1), [TomasBerretta](https://github.com/TomasBerretta), [CatalinaMendizabal](https://github.com/CatalinaMendizabal) and [NumaLeone](https://github.com/NumaLeone).
-
-# Trabajo Práctico
+<h1>RetroMove</h1>
 
 
-# Introducción a la computación
+<h1>Introducción a la computación</h1>
 
 
-## **_<span style="text-decoration:underline;">Profesores:</span>_** _Alejandro Silvestri, Ignacio Nuñez, Facundo González_
+**_<span style="text-decoration:underline;">Profesores:</span>_** _Alejandro Silvestri, Ignacio Nuñez, Facundo González_
 
-
-## **_<span style="text-decoration:underline;">Alumnos:</span>_ _Tomás Bruno, Tomás Berretta, Numa Leone Elizalde, Catalina Mendizabal_**
+**_<span style="text-decoration:underline;">Alumnos:</span>_ _Tomás Bruno, Tomás Berretta, Catalina Mendizabal, Numa Leone Elizalde_**
 
 
 
 **<span style="text-decoration:underline;">Introducción</span>**
 
-La idea principal del proyecto consiste en la creación de un arcade en donde en lugar de utilizar un dispositivo físico para jugar se puedan utilizar gestos realizados por el jugador, los cuales serán captados mediante un cámara y procesados como input para el juego.
+La idea principal del proyecto consiste en la creación de una aplicación web en donde en lugar de utilizar un dispositivo físico para jugar se puedan utilizar gestos realizados por el jugador, los cuales serán captados mediante un cámara y procesados como input para los distintos juegos. Además, el inicio de sesión de la aplicación funcionará con reconocimiento facial.
 
 **<span style="text-decoration:underline;">Iniciando con el proyecto</span>**
 
-Para poder llevar a cabo el proyecto, primero debemos contar con diversos elementos de hardware y software que nos ayuden como herramientas para la implementación del arcade. 
+Para poder llevar a cabo el proyecto, primero debemos contar con diversos elementos de hardware y software que nos ayuden como herramientas para la implementación del mismo. 
 
 _<span style="text-decoration:underline;">Para el hardware necesitamos contar con:</span>_
 
 
 
-* Cámara para el reconocimiento de movimientos 
-* Laptop para manejar el streaming: elegimos utilizar una laptop en lugar de una RaspberryPi debido a que el manejo de streaming es constante. 
+* Cámara para el reconocimiento de movimientos (en este caso decidimos utilizar la cámara de la laptop).
+* Laptop para manejar el streaming y correr la aplicación: elegimos utilizar una laptop en lugar de una RaspberryPi debido a que el manejo de streaming es constante.
 
 _<span style="text-decoration:underline;">Para la parte del software:</span>_
 
 
 
-* Django REST framework
+* Django REST framework 
 * React.js
 * MediaPipe para poder reconocer los diferentes tipos de gestos.
+* Biblioteca face-recognition para identificar a los jugadores permitiendo que puedan iniciar sesión
 
 **<span style="text-decoration:underline;">Desarrollo:</span>**
 
 En primer lugar, vamos a comenzar haciendo una REST API con Django para poder manejar los usuarios, leaderboards y toda la información relacionada con los juegos. 
 
-Luego, utilizando React.js realizaremos una aplicación web en la cual se puedan registrar los usuarios y jugar a los respectivos juegos. El registro de los usuarios se realizará mediante el pedido de información básica, como un nombre de usuario, y la toma de imágenes para poder ingresar mediante el uso del reconocimiento facial. Para esto, tenemos pensado utilizar librerías como face_recognition en conjunto de Python y OpenCV.
+Luego, utilizando React.js realizaremos una aplicación web en la cual se puedan registrar los usuarios y jugar a los respectivos juegos. El registro de los usuarios se realizará mediante el pedido de información básica, como un nombre de usuario, y la toma de imágenes para poder ingresar mediante el uso del reconocimiento facial. Para esto, se decidió utilizar la biblioteca face_recognition en Python, la cual funciona de la siguiente manera:
+
+
+
+1. Detecta en donde se encuentra la cara en la imagen.
+2. Agrega puntos de referencia en la cara para después rotar, transformar y escalar la imagen de forma que quede posicionada mirando hacia el frente.
+3. Utiliza una red neuronal entrenada para realizar un encode de la cara.
+4. Compara el encoding de la cara calculado en el paso anterior con aquellas caras ya asociadas a nombres, y devuelve el nombre si coinciden.
 
 Así mismo, para lograr que el usuario pueda jugar utilizando sus gestos, se correrá un script de fondo, el cual tomará la cámara como input reconociendo los gestos realizados por la persona y la posición de sus manos.
 
-Por último, para el reconocimiento de estos movimientos de la persona, consideramos utilizar MediaPipe que nos permite captar tanto los movimientos de la mano de la persona, como también distintas poses que el jugador realice. Se va a realizar un “mapeo” de los distintos gestos y poses a los distintos botones que tiene un arcade o joystick tradicional para poder interactuar con el juego.
+Por último, para el reconocimiento de estos movimientos de la persona, utilizamos MediaPipe que nos permite captar tanto los movimientos de la mano de la persona, como también distintas poses que el jugador realice. Se va a realizar un “mapeo” de los distintos gestos y poses a los distintos botones que permiten mover al jugador en los distintos juegos.
 
 **<span style="text-decoration:underline;">Primera etapa</span>**
 
-En esta primera etapa, creímos que era de suma importancia comenzar con la parte del software. Por este motivo, nuestro objetivo era lograr generar un programa capaz de interpretar nuestros movimientos corporales mediante el uso de una WebCam, para poder luego utilizar los movimientos de la persona como los controles del juego.
+En esta primera etapa, creímos que era de suma importancia comenzar con la parte del reconocimiento de movimientos. Por este motivo, nuestro objetivo era lograr generar un programa capaz de interpretar nuestros movimientos corporales mediante el uso de una WebCam, para poder luego utilizar los movimientos de la persona como los controles del juego.
 
-Comenzamos investigando sobre la librería MediaPipe y las diversas soluciones que esta nos propone para el reconocimiento corporal. Como primera opción, miramos la herramienta para las manos. La forma de operar es la siguiente: Con OpenCV se genera un objeto VideoCapture para tomar los video frames de la webcam. Luego, como OpenCV usa frames con el formato BGR y MediaPipe con RGB hay que hacer un cambio. Hecho esto, se siguen procesando los frames con landmarks según el tipo de modelo que estemos usando y van produciendo un “result” que indica si en el frame se encontró algún landmark. Implementamos la herramienta con Python y pudimos captar los diversos puntos de ambas manos. En un principio creímos que nos iba a ser de mucha ayuda, pero luego nos dimos cuenta que si para la emulación de los controles del arcade éramos capaces de interpretar otras partes del cuerpo, íbamos a poder generar más control y precisión para lograr nuestro objetivo.
+Comenzamos investigando sobre la biblioteca MediaPipe y las diversas soluciones que esta nos propone para el reconocimiento corporal. Como primera opción, miramos la herramienta para las manos. La forma de operar es la siguiente: Con OpenCV se genera un objeto VideoCapture para tomar los video frames de la webcam. Luego, como OpenCV usa frames con el formato BGR y MediaPipe con RGB hay que hacer una transformación. Hecho esto, se siguen procesando los frames con landmarks según el tipo de modelo que estemos usando y van produciendo un resultado que indica si en el frame se encontró algún landmark. Implementamos la herramienta con Python y pudimos captar los diversos puntos de ambas manos.
 
 <p align="center">
  <img src= "https://github.com/TomasBruno1/Arcade-IC/blob/master/screenshots/mano1.png" width=400 >
@@ -72,9 +76,59 @@ Una vez que probamos las herramientas de Pose y Hands por separado, decidimos us
 
 **<span style="text-decoration:underline;">Comienzo implementación Face Recognition y diseño web</span>**
 
-Usando la biblioteca face_recognition empezamos a implementar un script que reconozca la cara de una persona en una foto. El funcionamiento de esta biblioteca se realiza utilizando un directorio el cual contiene imágenes de personas para realizar el encoding de esa persona.  Luego, cuando le pasas una imagen específica, esta se encodea para poder compararla con las imágenes del directorio.
+Usando la biblioteca face_recognition empezamos a implementar un script que reconozca la cara de una persona en una foto. El funcionamiento de esta biblioteca se realiza utilizando un directorio el cual contiene imágenes de personas para realizar el encoding de esa persona. Luego, cuando le pasas una imagen específica, esta se encodea para poder compararla con las imágenes del directorio.
 
-Para el desarrollo de la página web, empezamos diseñando unos wireframes para las pantallas que tenemos pensado implementar : Landing Page, Register Page, Login Page, Home Page y Dashboard. Una vez hecho esto, comenzamos con la implementación de las páginas utilizando React.js.
+<p align="center">
+ <img src= "https://github.com/TomasBruno1/Arcade-IC/blob/master/screenshots/team.png" width=400 >
+</p>
+
+
+Para el desarrollo de la página web, empezamos diseñando unos wireframes para las pantallas que tenemos pensado implementar: Landing Page, Register Page, Login Page, Home Page y Leaderboard. Una vez hecho esto, comenzamos con la implementación de las páginas utilizando React.js.
+
+A su vez, se realizó el backend de la aplicación utilizando Django REST framework. Para esto se generó un modelo User el cual tiene nombre de usuario, la imagen que lo representa, y sus puntajes máximos en los distintos juegos. Se utiliza una base de datos SQlite. Para proveer distintos endpoints al frontend, se implementaron views provistas por Django y distintos urls a los cuales se les pueden pedir datos.
+
+**<span style="text-decoration:underline;">Resultado final </span>**
+
+Luego de haber integrado todo (Mediapipe, face-recognition, Django y React.js) , llegamos a obtener el siguiente resultado:
+
+
+
+_Pantalla de registro de usuario_ 
+
+<p align="center">
+ <img src= "https://github.com/TomasBruno1/Arcade-IC/blob/master/screenshots/register.png" width=400 >
+</p>
+
+_Pantalla de home_
+
+<p align="center">
+ <img src= "https://github.com/TomasBruno1/Arcade-IC/blob/master/screenshots/home.png" width=400 >
+</p>
+
+_Pantalla de juego_
+
+<p align="center">
+ <img src= "https://github.com/TomasBruno1/Arcade-IC/blob/master/screenshots/game.png" width=400 >
+</p>
+
+_Pantalla de leaderboard_
+
+<p align="center">
+ <img src= "https://github.com/TomasBruno1/Arcade-IC/blob/master/screenshots/leaderboard.png" width=400 >
+</p>
+
+_Pantalla de juego en conjunto con mediapipe_
+
+<p align="center">
+ <img src= "https://github.com/TomasBruno1/Arcade-IC/blob/master/screenshots/gamemediapipe.png" width=400 >
+</p>
+
+
+**<span style="text-decoration:underline;">Source code</span>**
+
+Se puede encontrar todo el código del proyecto en el siguiente repositorio de GitHub:
+
+[https://github.com/TomasBruno1/RetroMove](https://github.com/TomasBruno1/RetroMove)<span style="text-decoration:underline;"> </span>
 
 **<span style="text-decoration:underline;">Referencias: </span>**
 
@@ -89,3 +143,7 @@ Para el desarrollo de la página web, empezamos diseñando unos wireframes para 
 [https://es.reactjs.org/](https://es.reactjs.org/)  
 
 [https://github.com/ageitgey/face_recognition](https://github.com/ageitgey/face_recognition)
+
+[https://github.com/felamaslen/pacman-react](https://github.com/felamaslen/pacman-react)
+
+[https://github.com/ChigabigaChannel/react-hour-projects/tree/master/snake-game](https://github.com/ChigabigaChannel/react-hour-projects/tree/master/snake-game)
