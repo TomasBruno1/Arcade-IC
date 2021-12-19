@@ -93,7 +93,7 @@ Luego de haber integrado todo (Mediapipe, face-recognition, Django y React.js) ,
 
 
 
-_Pantalla de registro de usuario_
+_Pantalla de registro de usuario_ 
 
 <p align="center">
  <img src= "https://github.com/TomasBruno1/Arcade-IC/blob/master/screenshots/register.png" width=400 >
