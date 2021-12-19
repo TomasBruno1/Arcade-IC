@@ -57,11 +57,20 @@ En esta primera etapa, creímos que era de suma importancia comenzar con la part
 
 Comenzamos investigando sobre la biblioteca MediaPipe y las diversas soluciones que esta nos propone para el reconocimiento corporal. Como primera opción, miramos la herramienta para las manos. La forma de operar es la siguiente: Con OpenCV se genera un objeto VideoCapture para tomar los video frames de la webcam. Luego, como OpenCV usa frames con el formato BGR y MediaPipe con RGB hay que hacer una transformación. Hecho esto, se siguen procesando los frames con landmarks según el tipo de modelo que estemos usando y van produciendo un resultado que indica si en el frame se encontró algún landmark. Implementamos la herramienta con Python y pudimos captar los diversos puntos de ambas manos.
 
---------------------------------------------------------------------
+<p align="center">
+ <img src= "https://github.com/TomasBruno1/Arcade-IC/blob/master/screenshots/mano1.png" width=400 >
+ <img src= "https://github.com/TomasBruno1/Arcade-IC/blob/master/screenshots/mano2.png" width=400 >
+</p>
 
 Luego de familiarizarnos con el control de los diversos puntos de la mano, decidimos optar por la herramienta de la librería MediaPipe llamada Pose. Esta nueva herramienta nos brindaba la posibilidad de reconocer el cuerpo de la persona por completo, teniendo en cuenta diversos puntos corporales y faciales. Esto nos fue de mucha utilidad ya que en conjunto con el lenguaje Python, logramos reconocer ciertos puntos de ambas manos para lograr simular los controles de “up”, “down”, “left” y “right” de un típico control de videojuegos.
 
----------------------------------------------------------------------
+<p align="center">
+ <img src= "https://github.com/TomasBruno1/Arcade-IC/blob/master/screenshots/poseNone.png" width=400 >
+ <img src= "https://github.com/TomasBruno1/Arcade-IC/blob/master/screenshots/poseLeft.png" width=400 >
+ <img src= "https://github.com/TomasBruno1/Arcade-IC/blob/master/screenshots/poseRight.png" width=400 >
+ <img src= "https://github.com/TomasBruno1/Arcade-IC/blob/master/screenshots/poseUP.png" width=400 >
+ <img src= "https://github.com/TomasBruno1/Arcade-IC/blob/master/screenshots/poseDown.png" width=400 >
+</p>
 
 Una vez que probamos las herramientas de Pose y Hands por separado, decidimos usar Holistic, la cuál es un conjunto de ambas con la adición de Face. Esto nos va a permitir incorporar más formas de controlar los distintos inputs que posee un control de arcade mediante la combinación de gestos tanto de las manos como de todo el cuerpo.
 
@@ -69,12 +78,9 @@ Una vez que probamos las herramientas de Pose y Hands por separado, decidimos us
 
 Usando la biblioteca face_recognition empezamos a implementar un script que reconozca la cara de una persona en una foto. El funcionamiento de esta biblioteca se realiza utilizando un directorio el cual contiene imágenes de personas para realizar el encoding de esa persona. Luego, cuando le pasas una imagen específica, esta se encodea para poder compararla con las imágenes del directorio.
 
-
-
-<p id="gdcalert2" ><span style="color: red; font-weight: bold">>>>>>  gd2md-html alert: inline image link here (to images/image2.png). Store image on your image server and adjust path/filename/extension if necessary. </span><br>(<a href="#">Back to top</a>)(<a href="#gdcalert3">Next alert</a>)<br><span style="color: red; font-weight: bold">>>>>> </span></p>
-
-
--------------------------------------------------------------------
+<p align="center">
+ <img src= "https://github.com/TomasBruno1/Arcade-IC/blob/master/screenshots/team.png" width=400 >
+</p>
 
 
 Para el desarrollo de la página web, empezamos diseñando unos wireframes para las pantallas que tenemos pensado implementar: Landing Page, Register Page, Login Page, Home Page y Leaderboard. Una vez hecho esto, comenzamos con la implementación de las páginas utilizando React.js.
@@ -89,13 +95,33 @@ Luego de haber integrado todo (Mediapipe, face-recognition, Django y React.js) ,
 
 _Pantalla de registro de usuario_
 
+<p align="center">
+ <img src= "https://github.com/TomasBruno1/Arcade-IC/blob/master/screenshots/register.png" width=400 >
+</p>
+
 _Pantalla de home_
+
+<p align="center">
+ <img src= "https://github.com/TomasBruno1/Arcade-IC/blob/master/screenshots/home.png" width=400 >
+</p>
 
 _Pantalla de juego_
 
+<p align="center">
+ <img src= "https://github.com/TomasBruno1/Arcade-IC/blob/master/screenshots/game.png" width=400 >
+</p>
+
 _Pantalla de leaderboard_
 
+<p align="center">
+ <img src= "https://github.com/TomasBruno1/Arcade-IC/blob/master/screenshots/leaderboard.png" width=400 >
+</p>
+
 _Pantalla de juego en conjunto con mediapipe_
+
+<p align="center">
+ <img src= "https://github.com/TomasBruno1/Arcade-IC/blob/master/screenshots/gamemediapipe.png" width=400 >
+</p>
 
 
 **<span style="text-decoration:underline;">Source code</span>**
