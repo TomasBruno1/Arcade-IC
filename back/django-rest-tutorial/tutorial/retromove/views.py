@@ -3,8 +3,6 @@ import os
 from django.contrib.auth import login, logout
 from django.contrib.auth.decorators import login_required
 from rest_framework import viewsets
-from django.contrib.auth.views import LoginView
-from django.core import serializers
 from django.http import HttpResponse, JsonResponse
 from .models import User
 from .serializers import UserSerializer
@@ -51,7 +49,6 @@ class UserViewSet(viewsets.ModelViewSet):
 
     def list(self, request, *args, **kwargs):
         game = request.data['game']
-        print(game)
         data = list(User.objects.order_by('-score_'+game).values('username', 'score_'+game))
         return JsonResponse(data, safe=False)
 
