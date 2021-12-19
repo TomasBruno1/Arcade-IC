@@ -3,7 +3,6 @@ import os
 from django.contrib.auth import login, logout
 from django.contrib.auth.decorators import login_required
 from rest_framework import viewsets
-from django.contrib.auth.views import LoginView
 from django.http import HttpResponse, JsonResponse
 from .models import User
 from .serializers import UserSerializer
@@ -19,6 +18,7 @@ class UserViewSet(viewsets.ModelViewSet):
     queryset = User.objects.all()
     serializer_class = UserSerializer
     user = User
+    pagination_class = None
 
     def post(self, request, *args, **kwargs):
         username = request.data['username']
@@ -47,6 +47,10 @@ class UserViewSet(viewsets.ModelViewSet):
         user.save()
         return HttpResponse({'Score updated'}, status=200)
 
+    def list(self, request, *args, **kwargs):
+        game = request.data['game']
+        data = list(User.objects.order_by('-score_'+game).values('username', 'score_'+game))
+        return JsonResponse(data, safe=False)
 
 @api_view(["POST"])
 @permission_classes([])
