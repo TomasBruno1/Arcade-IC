@@ -6,7 +6,7 @@
 
 **_<span style="text-decoration:underline;">Profesores:</span>_** _Alejandro Silvestri, Ignacio Nuñez, Facundo González_
 
-**_<span style="text-decoration:underline;">Alumnos:</span>_ _Tomás Bruno, Tomás Berretta, Catalina Mendizabal, Numa Leone Elizalde_**
+**_<span style="text-decoration:underline;">Alumnos:</span>_ _Tomás Bruno, Tomás Berretta, Catalina Mendizabal_**
 
 
 
